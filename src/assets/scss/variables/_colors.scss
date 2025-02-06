@@ -1,0 +1,231 @@
+$primary-900: #081B38;
+$primary-800: #132D56;
+$primary-700: #203D6B;
+$primary-600: #2E4F83;
+$primary-500: #2F599B;
+$primary-400: #5578AF;
+$primary-300: #7E9CCC;
+$primary-200: #B0C4E3;
+$primary-100: #D5E1F3;
+$primary-50: #EEF5FF;
+$primary: $primary-600;
+$primary-light: $primary-300;
+$primary-dark: $primary-900;
+
+$secondary-900: #623B2E;
+$secondary-800: #834835;
+$secondary-700: #974E35;
+$secondary-600: #B15232;
+$secondary-500: #ca5027;
+$secondary-400: #D97554;
+$secondary-300: #E78C6E;
+$secondary-200: #F2A287;
+$secondary-100: #FBC1AD;
+$secondary-50: #FDDACF;
+$secondary: $secondary-500;
+$secondary-light: $secondary-300;
+$secondary-dark: $secondary-900;
+
+$tertiary-700: #167396;
+$tertiary-600: #198EBA;
+$tertiary-500: #00AEEF;
+$tertiary-400: #3FBCEB;
+$tertiary-300: #6DCFF3;
+$tertiary-200: #3FBCEB;
+$tertiary-100: #CAF1FF;
+$tertiary-25: #ECFAFF;
+$tertiary: $tertiary-600;
+$tertiary-light: $tertiary-300;
+$tertiary-dark: $tertiary-600;
+
+$success-900: #064E3B;
+$success-800: #065F46;
+$success-700: #047857;
+$success-600: #059669;
+$success-500: #10B981;
+$success-400: #34D399;
+$success-300: #6EE7B7;
+$success-200: #A7F3D0;
+$success-100: #D1FAE5;
+$success-50: #ECFDF5;
+$success: $success-500;
+$success-light: $success-400;
+$success-dark: $success-600;
+
+$warning-900: #78350F;
+$warning-800: #92400E;
+$warning-700: #B45309;
+$warning-600: #D97706;
+$warning-500: #F59E0B;
+$warning-400: #FBBF24;
+$warning-300: #FCD34D;
+$warning-200: #FDE68A;
+$warning-100: #FEF3C7;
+$warning-50: #FFFBEB;
+$warning: $warning-500;
+$warning-light: $warning-400;
+$warning-dark: $warning-600;
+
+$danger-900: #7F1D1D;
+$danger-800: #991B1B;
+$danger-700: #B91C1C;
+$danger-600: #DC2626;
+$danger-500: #EF4444;
+$danger-400: #F87171;
+$danger-300: #FCA5A5;
+$danger-200: #FECACA;
+$danger-100: #FEE2E2;
+$danger-50: #FEF2F2;
+$danger: $danger-500; 
+$danger-light: $danger-400;
+$danger-dark: $danger-600;
+
+$gray-900: #12131E;
+$gray-800: #222239;
+$gray-700: #393951;
+$gray-600: #505065;
+$gray-500: #77758F;
+$gray-400: #9190A3;
+$gray-300: #BAB9CC;
+$gray-200: #D3D2E5;
+$gray-100: #E3E3F0;
+$gray-50: #EFF0F8;
+$gray-25: #F9F9FF;
+$gray: $gray-600;
+$gray-light: $gray-400;
+$gray-dark: #333;
+
+$white: #FFFFFF;
+$black: #000000;
+
+// neutrals
+
+$neutral-900: #12131E;
+$neutral-800: #222239;
+$neutral-700: #393951;
+$neutral-600: #505065;
+$neutral-500: #77758F;
+$neutral-400: #9190A3;
+$neutral-300: #BAB9CC;
+$neutral-200: #D3D2E5;
+$neutral-100: #E3E3F0;
+$neutral-50: #EFF0F8;
+$neutral-25: #F6F7FF;
+$neutral: $neutral-500;
+$neutral-light: $neutral-400;
+$neutral-dark: $neutral-600;
+
+// theme-colors-map
+// Add colors to map to use contextually with bootstrap classes (ie. text-primary, bg-primary ...)
+$theme-colors: (
+
+  "primary":            $primary,
+  "primary-light":      $primary-light,
+  "primary-900":        $primary-900,
+  "primary-800":        $primary-800,
+  "primary-700":        $primary-700,
+  "primary-600":        $primary-600,
+  "primary-500":        $primary-500,
+  "primary-400":        $primary-400,
+  "primary-300":        $primary-300,
+  "primary-200":        $primary-200,
+  "primary-100":        $primary-100,
+  "primary-50":         $primary-50,
+
+  "secondary":          $secondary,
+  "secondary-light":    $secondary-light,
+  "secondary-dark":     $secondary-dark,
+  "secondary-900":      $secondary-900,
+  "secondary-800":      $secondary-800,
+  "secondary-700":      $secondary-700,
+  "secondary-600":      $secondary-600,
+  "secondary-500":      $secondary-500,
+  "secondary-400":      $secondary-400,
+  "secondary-300":      $secondary-300,
+  "secondary-200":      $secondary-200,
+  "secondary-100":      $secondary-100,
+  "secondary-50":       $secondary-50,
+  
+  "tertiary-700":      $tertiary-700,
+  "tertiary-600":      $tertiary-600,
+  "tertiary-500":      $tertiary-500,
+  "tertiary-400":      $tertiary-400,
+  "tertiary-300":      $tertiary-300,
+  "tertiary-200":      $tertiary-200,
+  "tertiary-100":      $tertiary-100,
+  "tertiary-25":      $tertiary-25,
+
+  "success":            $success,
+  "success-light":      $success-light,
+  "success-dark":       $success-dark,
+  "success-900":        $success-900,
+  "success-800":        $success-800,
+  "success-700":        $success-700,
+  "success-600":        $success-600,
+  "success-500":        $success-500,
+  "success-400":        $success-400,
+  "success-300":        $success-300,
+  "success-200":        $success-200,
+  "success-100":        $success-100,
+  "success-50":         $success-50,
+
+  "warning":            $warning,
+  "warning-light":      $warning-light,
+  "warning-dark":       $warning-dark,
+  "warning-900":        $warning-900,
+  "warning-800":        $warning-800,
+  "warning-700":        $warning-700,
+  "warning-600":        $warning-600,
+  "warning-500":        $warning-500,
+  "warning-400":        $warning-400,
+  "warning-300":        $warning-300,
+  "warning-200":        $warning-200,
+  "warning-100":        $warning-100,
+  "warning-50":         $warning-50,
+
+  "danger":             $danger,
+  "danger-light":       $danger-light,
+  "danger-dark":        $danger-dark,
+  "danger-900":         $danger-900,
+  "danger-800":         $danger-800,
+  "danger-700":         $danger-700,
+  "danger-600":         $danger-600,
+  "danger-500":         $danger-500,
+  "danger-400":         $danger-400,
+  "danger-300":         $danger-300,
+  "danger-200":         $danger-200,
+  "danger-100":         $danger-100,
+  "danger-50":          $danger-50,
+
+  "gray-light":         $gray-light,
+  "gray-dark":          $gray-dark,
+  "gray-900":           $gray-900,
+  "gray-800":           $gray-800,
+  "gray-700":           $gray-700,
+  "gray-600":           $gray-600,
+  "gray-500":           $gray-500,
+  "gray-400":           $gray-400,
+  "gray-300":           $gray-300,
+  "gray-200":           $gray-200,
+  "gray-100":           $gray-100,
+  "gray-50":            $gray-50,
+  "gray-25":            $gray-25,
+
+  "black":              $black,
+  "white":              $white,
+
+  "neutral-900":        $neutral-900,
+  "neutral-800":        $neutral-800,
+  "neutral-700":        $neutral-700,
+  "neutral-600":        $neutral-600,
+  "neutral-500":        $neutral-500,
+  "neutral-400":        $neutral-400,
+  "neutral-300":        $neutral-300,
+  "neutral-200":        $neutral-200,
+  "neutral-100":        $neutral-100,
+  "neutral-50":         $neutral-50,
+  "neutral-25":         $neutral-25,
+  "neutral":            $neutral,
+  "neutral-light":      $neutral-light,
+  "neutral-dark":       $neutral-dark
+);

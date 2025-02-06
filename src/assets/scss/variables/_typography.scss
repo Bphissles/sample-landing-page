@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+$font-size-legal: 10px;
+$font-size-caption: 12px;
+$font-size-p1: 14px;
+$font-size-p2: 16px;
+$font-size-p3: 18px;
+$font-size-heading-01: 48px;
+$font-size-heading-02: 39px;
+$font-size-heading-03: 34px;
+$font-size-heading-04: 33px;
+$font-size-heading-05: 28px;
+$font-size-heading-06: 23px;
+$font-size-heading-07: 19px;
+$font-size-subheading: 20px;
+
+// Specific heading styling
+$font-size-h1-lg: $font-size-heading-01;
+$font-size-h1-sm: $font-size-heading-03;
+
+$font-size-h2-lg: $font-size-heading-02;
+$font-size-h2-sm: $font-size-heading-04;
+
+$font-size-h3-lg: $font-size-heading-04;
+$font-size-h3-sm: $font-size-heading-05;
+
+$font-size-h4-lg: $font-size-heading-05;
+$font-size-h4-sm: $font-size-heading-06;
+
+$font-size-h5-lg: $font-size-heading-06;
+$font-size-h5-sm: $font-size-heading-07;
+
+$font-size-h6-lg: $font-size-heading-07;
+$font-size-h6-sm: $font-size-p2;
+
+// Font families
+$font-family-body: "Source Code Pro", sans-serif;
+$font-family-heading: "JetBrains Mono", sans-serif;
+
+$heading-sizes: (
+  "h1": (
+    sm: $font-size-h1-sm,
+    lg: $font-size-h1-lg
+  ),
+  "h2": (
+    sm: $font-size-h2-sm,
+    lg: $font-size-h2-lg
+  ),
+  "h3": (
+    sm: $font-size-h3-sm,
+    lg: $font-size-h3-lg
+  ),
+  "h4": (
+    sm: $font-size-h4-sm,
+    lg: $font-size-h4-lg
+  ),
+  "h5": (
+    sm: $font-size-h5-sm,
+    lg: $font-size-h5-lg
+  ),
+  "h6": (
+    sm: $font-size-h6-sm,
+    lg: $font-size-h6-lg
+  )
+);
+
+// font-size-map
+// Add font sizes to map to use contextually with font size classes (ie. font-size-legal, font-size-heading-01 ...)
+$font-sizes: (
+  "legal": $font-size-legal,
+  "caption": $font-size-caption,
+  "p1": $font-size-p1,
+  "p2": $font-size-p2,
+  "p3": $font-size-p3,
+  "heading-01": $font-size-heading-01,
+  "heading-02": $font-size-heading-02,
+  "heading-03": $font-size-heading-03,
+  "heading-04": $font-size-heading-04,
+  "heading-05": $font-size-heading-05,
+  "heading-06": $font-size-heading-06,
+  "heading-07": $font-size-heading-07,
+  "subheading": $font-size-subheading
+);

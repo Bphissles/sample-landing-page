@@ -1,0 +1,21 @@
+// Set global base font family
+body {
+  font-family: $font-family-body;
+}
+
+// Base heading font
+h1, h2, h3, h4, h5, h6, .heading {
+  font-family: $font-family-heading;
+  // font-style: italic;
+}
+
+p {
+  margin: 0;
+}
+
+// Global font sizes
+@each $name, $size in $font-sizes {
+  .font-size-#{$name} {
+    font-size: $size !important;
+  }
+}

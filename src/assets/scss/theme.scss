@@ -1,0 +1,14 @@
+// Import variables before Bootstrap to overwrite default variables.
+@import 'variables/variables';
+
+// Bootstrap 5.3
+@import '/node_modules/bootstrap/scss/bootstrap.scss';
+
+
+@import 'typography';
+@import './variables/variables';
+
+body {
+    min-height: 100vh;
+    // background: #BAB9CC;
+}
