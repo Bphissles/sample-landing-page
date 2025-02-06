@@ -36,7 +36,7 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
   </div>
 
   <div class="image-carousel py-5 text-center">
-    <Splide :options="{ type:'loop',perPage:4,autoplay:true,speed:2000,pauseOnFocus:true,breakpoints: {640: {perPage: 2,},} }" aria-label="My Favorite Images">
+    <Splide :options="{ type:'loop',perPage:4,autoplay:true,speed:2000,pauseOnFocus:true,breakpoints: {640: {perPage: 1,},} }" aria-label="My Favorite Images">
       <SplideSlide>
         <img src="https://picsum.photos/800/400" alt="Sample 2">
       </SplideSlide>
@@ -150,11 +150,11 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
         <div class="border rounded px-4 py-3">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
-              <h3 class="mb-0">Article Type</h3>
+              <p class="mb-0 h3">Article Type</p>
               <p><em>PUBLISH DATE</em></p>
             </div>
             <img src="https://picsum.photos/600/250" alt="" class="img-fluid rounded">
-            <h4 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h4>
+            <h3 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h3>
             <p>
               Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. 
               Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, 
@@ -173,11 +173,11 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
         <div class="border rounded px-4 py-3">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
-              <h3 class="mb-0">Audio Design</h3>
+              <p class="mb-0 h3">Audio Design</p>
               <p><em>PUBLISH DATE</em></p>
             </div>
             <img src="https://picsum.photos/600/250" alt="" class="img-fluid rounded">
-            <h4 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h4>
+            <h3 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h3>
             <p>
               Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. 
               Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, 
