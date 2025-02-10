@@ -1,18 +1,27 @@
 <script setup>
+import { useRouter } from 'vue-router';
 import HeroBanner from '@/components/HeroBanner.vue'
-import Github from '@/components/icons/social/Github.vue'
-import Instagram from '@/components/icons/social/Instagram.vue'
+import SectionHeading from '@/components/SectionHeading.vue';
+import StaffEntry from '@/components/StaffEntry.vue';
+import TimeLine from '@/components/TimeLine.vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+
+const router = useRouter();
+const pushBlogRoute = (route) => {
+  router.push(`/blog/${route}`);
+}
 </script>
 
 <template>
-  <HeroBanner/>
+  <HeroBanner
+    heading="LANDING PAGE"
+    sub-heading="small landing"
+  />
   <div class="container-lg">
-    
-    <div class="section-heading pt-5 my-4">
-      <h2>What the fuck is it going to be</h2>
-      <p><em>A game or some shit</em></p>
-    </div>
+    <SectionHeading
+      heading="What the fuck is it going to be"
+      sub-heading="A game or some shit"
+    />
 
     <div class="mb-4">
       <p>
@@ -73,25 +82,13 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
     </Splide>
   </div>
 
-  <div class="time-line">
-    <div class="container-lg text-end">
-      <h3>Game Roadmap</h3>
-      <div class="my-4 d-md-flex justify-content-between px-5 text-center">
-        <div class="border mb-2 mb-md-0 p-3 bg-success-400 rounded-pill">Step 1</div>
-        <div class="border mb-2 mb-md-0 p-3 bg-success-400 rounded-pill">Step 2</div>
-        <div class="border mb-2 mb-md-0 p-3 rounded-pill">Step 3</div>
-        <div class="border mb-2 mb-md-0 p-3 rounded-pill">Step 4</div>
-        <div class="border mb-2 mb-md-0 p-3 rounded-pill">Step 5</div>
-        <div class="border mb-2 mb-md-0 p-3 rounded-pill">Step 6</div>
-      </div>
-    </div>
-  </div>
+  <TimeLine />
 
   <div class="container-lg">
-    <div class="section-heading pt-5 my-4">
-      <h2>Hey a level 2 Heading</h2>
-      <p><em>Oh Hey some accent text</em></p>
-    </div>
+    <SectionHeading
+      heading="Hey a level 2 Heading"
+      sub-heading="Oh Hey some accent text"
+    />
 
     <div class="row">
       <div class="col-sm-4 mb-4 mb-md-0">
@@ -140,14 +137,16 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
           <p><em>showcase a few</em></p>
         </div>
         
-        <p class="h5"><a href=""><em>Full Blog</em></a></p>
+        <p class="h5">
+          <RouterLink to="/blog"><em>Full Blog</em></RouterLink>
+        </p>
       </div>
     </div>
 
     <div class="row">
 
       <div class="col-sm-6 mb-4 mb-sm-0">
-        <div class="border rounded px-4 py-3">
+        <div class="border rounded px-4 py-3" @click="pushBlogRoute('articleHome1')">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Article Type</p>
@@ -163,14 +162,16 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
               doloribus enim consequuntur eius.
             </p>
             <div class="text-end mt-3">
-              <a href="" class=""><em>Keep Reading</em></a>
+              <RouterLink to="/blog/articleHome1">
+                <em>Keep Reading</em>
+              </RouterLink>
             </div>
           </article>
         </div>
       </div>
 
       <div class="col-sm-6">
-        <div class="border rounded px-4 py-3">
+        <div class="border rounded px-4 py-3" @click="pushBlogRoute('articleHome2')">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Audio Design</p>
@@ -186,7 +187,9 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
               doloribus enim consequuntur eius.
             </p>
             <div class="text-end mt-3">
-              <a href="" class=""><em>Keep Reading</em></a>
+              <RouterLink to="/blog/articleHome2">
+                <em>Keep Reading</em>
+              </RouterLink>
             </div>
           </article>
         </div>
@@ -196,59 +199,16 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
   </div>
 
   <div class="container-lg">
-    <div class="section-heading pt-5 my-4 text-end">
-      <h2>Who We Are?</h2>
-      <p><em>Some Bitches</em></p>
-    </div>
-    <hr>
-    <div class="person-card d-md-flex gap-3 align-items-center mb-4">
-      <div class="text-center">
-        <img src="https://picsum.photos/150" alt="" class="rounded-circle">
-      </div>
-      <div class="details">
-        <p><strong><em>Name</em></strong> Title</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iure itaque? Qui rem voluptatibus aliquid debitis excepturi laborum fugit ipsa hic corporis facilis, nisi et quidem iste id dolorum ex, praesentium eaque sit aperiam incidunt?</p>
-        <div class="socials d-flex mt-2">
-          <div class="social-icon d-flex gap-3">
-            <Github />
-            <Instagram />
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="person-card d-md-flex gap-3 align-items-center mb-4">
-      <div class="text-center">
-        <img src="https://picsum.photos/150" alt="" class="rounded-circle">
-      </div>
-      <div class="details">
-        <p><strong><em>Name</em></strong> Title</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iure itaque? Qui rem voluptatibus aliquid debitis excepturi laborum fugit ipsa hic corporis facilis, nisi et quidem iste id dolorum ex, praesentium eaque sit aperiam incidunt?</p>
-        <div class="socials d-flex mt-2">
-          <div class="social-icon d-flex gap-3">
-            <Github />
-            <Instagram />
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class="person-card d-md-flex gap-3 align-items-center mb-4">
-      <div class="text-center">
-        <img src="https://picsum.photos/150" alt="" class="rounded-circle">
-      </div>
-      <div class="details">
-        <p><strong><em>Name</em></strong> Title</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iure itaque? Qui rem voluptatibus aliquid debitis excepturi laborum fugit ipsa hic corporis facilis, nisi et quidem iste id dolorum ex, praesentium eaque sit aperiam incidunt?</p>
-        <div class="socials d-flex mt-2">
-          <div class="social-icon d-flex gap-3">
-            <Github />
-            <Instagram />
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
+    <SectionHeading 
+      heading="Who We Are?"
+      sub-heading="Some Bitches"
+      alignment="text-end"
+    />
+    
+    <StaffEntry />
+    <StaffEntry />
+    <StaffEntry />
+    <StaffEntry />
   </div>
 
 </template>
