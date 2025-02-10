@@ -114,3 +114,8 @@ const pushBlogRoute = (route) => {
     </article>
   </div>
 </template>
+<style lang="scss" scoped>
+.article-card {
+  cursor: pointer;
+}
+</style>

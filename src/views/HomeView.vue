@@ -146,7 +146,7 @@ const pushBlogRoute = (route) => {
     <div class="row">
 
       <div class="col-sm-6 mb-4 mb-sm-0">
-        <div class="border rounded px-4 py-3" @click="pushBlogRoute('articleHome1')">
+        <div class="border rounded px-4 py-3 article-card" @click="pushBlogRoute('articleHome1')">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Article Type</p>
@@ -171,7 +171,7 @@ const pushBlogRoute = (route) => {
       </div>
 
       <div class="col-sm-6">
-        <div class="border rounded px-4 py-3" @click="pushBlogRoute('articleHome2')">
+        <div class="border rounded px-4 py-3 article-card" @click="pushBlogRoute('articleHome2')">
           <article>
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Audio Design</p>
@@ -216,5 +216,8 @@ const pushBlogRoute = (route) => {
 .social-icon {
   height: 40px;
   width: auto;
+}
+.article-card {
+  cursor: pointer;
 }
 </style>
