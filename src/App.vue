@@ -5,7 +5,7 @@ import Footer from '@/components/navigation/Footer.vue'
 </script>
 
 <template>
-  <header>
+  <header class="sticky-top">
     <Header />
   </header>
 

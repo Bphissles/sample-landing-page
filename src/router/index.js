@@ -22,6 +22,12 @@ const router = createRouter({
       component: SingleArticle
     }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    // if (to.name === 'blog' || to.name === 'single-article') {
+    //   return { top: 0 }
+    // }
+    return { top: 0 }
+  },
 })
 
 export default router

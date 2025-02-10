@@ -145,9 +145,9 @@ const pushBlogRoute = (route) => {
 
     <div class="row">
 
-      <div class="col-sm-6 mb-4 mb-sm-0">
-        <div class="border rounded px-4 py-3 article-card" @click="pushBlogRoute('articleHome1')">
-          <article>
+      <div class="col-sm-6 mb-4 mb-sm-0" >
+        <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute('articleHome1')">
+          <article class="">
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Article Type</p>
               <p><em>PUBLISH DATE</em></p>
@@ -170,9 +170,9 @@ const pushBlogRoute = (route) => {
         </div>
       </div>
 
-      <div class="col-sm-6">
-        <div class="border rounded px-4 py-3 article-card" @click="pushBlogRoute('articleHome2')">
-          <article>
+      <div class="col-sm-6" >
+        <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute('articleHome2')">
+          <article class="">
             <div class="d-flex align-items-center justify-content-between mb-3">
               <p class="mb-0 h3">Audio Design</p>
               <p><em>PUBLISH DATE</em></p>
@@ -212,12 +212,34 @@ const pushBlogRoute = (route) => {
   </div>
 
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../assets/scss/variables/colors';
+
 .social-icon {
   height: 40px;
   width: auto;
 }
 .article-card {
-  cursor: pointer;
+  cursor: pointer !important;
+  &:hover {
+    animation: shadow-drop-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+}
+
+@-webkit-keyframes shadow-drop-center {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0px 0px 18px 8px rgb(255,255,255);
+  }
+}
+@keyframes shadow-drop-center {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0px 0px 18px 8px rgb(255,255,255);
+  }
 }
 </style>

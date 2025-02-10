@@ -6,7 +6,7 @@ const route = useRoute();
 const slug = ref(route.params.slug);
 </script>
 <template>
-  <img src="https://picsum.photos/1800/200" alt="">
+  <img src="https://picsum.photos/2400/300" alt="" class="img-fluid">
   <div class="container-lg">
     <SectionHeading 
       :heading="slug"

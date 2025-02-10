@@ -5,7 +5,9 @@ import { RouterLink } from 'vue-router';
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-lg">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">
+        <img src="/images/torch-trans.png" alt="" height="60">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -18,14 +20,11 @@ import { RouterLink } from 'vue-router';
             <RouterLink class="nav-link" to="/blog">Blog</RouterLink>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="#">Progress</a>
           </li>
         </ul>
         <span class="navbar-text">
-          Navbar text with an inline element
+          Nugget about the game
         </span>
       </div>
     </div>
