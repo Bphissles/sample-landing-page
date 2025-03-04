@@ -356,6 +356,7 @@ except SyntaxError as e:
 <style>
 pre {
   background: #f4f4f4;
+  padding: 12px;
 }
 
 .navbar-nav {
