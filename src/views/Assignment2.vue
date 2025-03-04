@@ -23,7 +23,7 @@
         <pre v-else>Error</pre>
       </div>
       <div class="col-sm-9">
-        <h3>Parser Code:</h3>
+        <h3>Python Parser Code:</h3>
         <pre><code>{{ parserCode }}</code></pre>
       </div>
     </div>
@@ -187,7 +187,7 @@ class Parser {
     }
     throw new Error(`Syntax Error: Unexpected token ${this.recognizer.look()?.value}`);
   }
-  
+
   parseDeclaration() {
     this.recognizer.consume("IDENTIFIER");
     this.recognizer.consume("EQUALS");
