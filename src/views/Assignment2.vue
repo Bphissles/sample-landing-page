@@ -104,7 +104,7 @@ class Recognizer {
 
   match(expectedType) {
     if (this.look() && this.look().type === expectedType) {
-      return this.tokens[this.position++];
+      return this.consume(expectedType);
     }
     return null;
   }
@@ -125,13 +125,69 @@ class Parser {
   parseStatement() {
     if (this.recognizer.match("LET")) {
       this.parseDeclaration();
-    } else if (this.recognizer.look()?.type === "IDENTIFIER") {
+    } else if (this.recognizer.match("IF")) {
+      this.parseIfStatement();
+    } else if (this.recognizer.match("WHILE")) {
+      this.parseWhileStatement();
+    } else if (this.recognizer.match("PRINT")) {
+      this.parsePrintStatement();
+    } else if (this.recognizer.look() && this.recognizer.look().type === "IDENTIFIER") {
       this.parseAssignment();
     } else {
       throw new Error(`Syntax Error: Unexpected token ${this.recognizer.look()?.value}`);
     }
   }
 
+  parseIfStatement() {
+    this.recognizer.consume("LEFTPARENT");
+    this.parseCondition();
+    this.recognizer.consume("RIGHTPARENT");
+    this.recognizer.consume("LEFTBRACE");
+    while (this.recognizer.look() && this.recognizer.look().type !== "RIGHTBRACE") {
+      this.parseStatement();
+    }
+    this.recognizer.consume("RIGHTBRACE");
+  }
+
+  parseWhileStatement() {
+    this.recognizer.consume("LEFTPARENT");
+    this.parseCondition();
+    this.recognizer.consume("RIGHTPARENT");
+    this.recognizer.consume("LEFTBRACE");
+    while (this.recognizer.look() && this.recognizer.look().type !== "RIGHTBRACE") {
+      this.parseStatement();
+    }
+    this.recognizer.consume("RIGHTBRACE");
+  }
+
+  parseCondition() {
+    this.parseExpression();
+    this.recognizer.consume("REL_OP");
+    this.parseExpression();
+  }
+
+  parsePrintStatement() {
+    this.recognizer.consume("LEFTPARENT");
+    this.parseExpression();
+    this.recognizer.consume("RIGHTPARENT");
+    this.recognizer.consume("SEMICOLON");
+  }
+
+  parseExpression() {
+    this.parseTerm();
+    while (this.recognizer.look() && (this.recognizer.look().type === "PLUS" || this.recognizer.look().type === "MINUS")) {
+      this.recognizer.consume(this.recognizer.look().type);
+      this.parseTerm();
+    }
+  }
+
+  parseTerm() {
+    if (this.recognizer.match("NUMBER") || this.recognizer.match("IDENTIFIER")) {
+      return;
+    }
+    throw new Error(`Syntax Error: Unexpected token ${this.recognizer.look()?.value}`);
+  }
+  
   parseDeclaration() {
     this.recognizer.consume("IDENTIFIER");
     this.recognizer.consume("EQUALS");
@@ -144,12 +200,6 @@ class Parser {
     this.recognizer.consume("EQUALS");
     this.parseExpression();
     this.recognizer.consume("SEMICOLON");
-  }
-
-  parseExpression() {
-    if (!this.recognizer.match("NUMBER") && !this.recognizer.match("IDENTIFIER")) {
-      throw new Error(`Syntax Error: Expected NUMBER or IDENTIFIER, found ${this.recognizer.look()?.value ?? "EOF"}`);
-    }
   }
 }
 
