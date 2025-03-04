@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-lg">
+    <div class="container">
       <a class="navbar-brand" href="#">
         <img src="/images/torch-trans.png" alt="" height="60">
       </a>
@@ -24,7 +24,7 @@ import { RouterLink } from 'vue-router';
           </li>
         </ul>
         <span class="navbar-text">
-          Nugget about the game
+          CS-3210-002: Project2: Syntax and Semantics
         </span>
       </div>
     </div>
