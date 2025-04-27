@@ -1,25 +1,19 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
 import { useRouter } from 'vue-router';
-import { fetchAllArticles } from '@/services/articleApi';
+import { useArticleStore } from '@/stores/articleStore';
 
-// State for articles
-const articles = ref([]);
-const isLoading = ref(true);
-const error = ref(null);
+// Initialize the article store
+const articleStore = useArticleStore();
 
 // Fetch all articles when component mounts
 onMounted(async () => {
   try {
-    isLoading.value = true;
-    articles.value = await fetchAllArticles();
+    await articleStore.fetchAllArticles();
   } catch (err) {
-    error.value = 'Failed to load articles';
-    console.error(err);
-  } finally {
-    isLoading.value = false;
+    console.error('Error fetching articles:', err);
   }
 });
 
@@ -42,17 +36,17 @@ const pushBlogRoute = (route) => {
       alignment="text-start"
     />
 
-    <div v-if="isLoading" class="text-center py-4">
+    <div v-if="articleStore.baseStore.isLoading" class="text-center py-4">
       <p>Loading articles...</p>
     </div>
     
-    <div v-else-if="error" class="text-center py-4 text-danger">
-      <p>{{ error }}</p>
+    <div v-else-if="articleStore.baseStore.error" class="text-center py-4 text-danger">
+      <p>{{ articleStore.baseStore.error }}</p>
     </div>
     
     <template v-else>
       <article 
-        v-for="article in articles" 
+        v-for="article in articleStore.allArticles" 
         :key="article.id" 
         class="article-card pb-4" 
         @click="pushBlogRoute(article.id)"

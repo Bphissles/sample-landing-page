@@ -23,9 +23,9 @@ const router = createRouter({
     }
   ],
   scrollBehavior(to, from, savedPosition) {
-    // if (to.name === 'blog' || to.name === 'single-article') {
-    //   return { top: 0 }
-    // }
+    if (to.name === 'blog' || to.name === 'single-article') {
+      return { top: 0 }
+    }
     return { top: 0 }
   },
 })

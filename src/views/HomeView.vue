@@ -1,76 +1,33 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import HeroBanner from '@/components/HeroBanner.vue'
 import SectionHeading from '@/components/SectionHeading.vue';
 import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
-import { fetchCarouselImages } from '@/services/carouselApi';
-import { fetchFeaturedArticles } from '@/services/articleApi';
-import { fetchStaff } from '@/services/staffApi';
 
-// State for carousel images, featured articles, and staff
-const carouselImages = ref([]);
-const featuredArticles = ref([]);
-const staffMembers = ref([]);
-const isLoading = ref(true);
-const isArticlesLoading = ref(true);
-const isStaffLoading = ref(true);
-const error = ref(null);
-const articlesError = ref(null);
-const staffError = ref(null);
+// Import Pinia stores
+import { useCarouselStore } from '@/stores/carouselStore';
+import { useArticleStore } from '@/stores/articleStore';
+import { useStaffStore } from '@/stores/staffStore';
 
-// Fetch carousel images, featured articles, and staff when component mounts
+// Initialize Pinia stores
+const carouselStore = useCarouselStore();
+const articleStore = useArticleStore();
+const staffStore = useStaffStore();
+
+// Fetch data when component mounts
 onMounted(async () => {
   try {
-    isLoading.value = true;
-    isArticlesLoading.value = true;
-    isStaffLoading.value = true;
-    
-    // Fetch carousel images
-    const carouselPromise = fetchCarouselImages()
-      .then(images => {
-        carouselImages.value = images;
-      })
-      .catch(err => {
-        error.value = 'Failed to load carousel images';
-        console.error('Carousel error:', err);
-      })
-      .finally(() => {
-        isLoading.value = false;
-      });
-    
-    // Fetch featured articles
-    const articlesPromise = fetchFeaturedArticles()
-      .then(articles => {
-        featuredArticles.value = articles;
-      })
-      .catch(err => {
-        articlesError.value = 'Failed to load featured articles';
-        console.error('Articles error:', err);
-      })
-      .finally(() => {
-        isArticlesLoading.value = false;
-      });
-      
-    // Fetch staff members
-    const staffPromise = fetchStaff()
-      .then(staff => {
-        staffMembers.value = staff;
-      })
-      .catch(err => {
-        staffError.value = 'Failed to load staff data';
-        console.error('Staff error:', err);
-      })
-      .finally(() => {
-        isStaffLoading.value = false;
-      });
-    
-    // Wait for all promises to resolve
-    await Promise.all([carouselPromise, articlesPromise, staffPromise]);
+    // Fetch all data in parallel
+    await Promise.all([
+      carouselStore.fetchData(),
+      articleStore.fetchFeaturedArticles(),
+      staffStore.fetchData()
+    ]);
   } catch (err) {
-    console.error('General error:', err);
+    console.error('Error fetching data:', err);
   }
 });
 
@@ -113,11 +70,11 @@ const pushBlogRoute = (route) => {
   </div>
 
   <div class="image-carousel py-5 text-center">
-    <div v-if="isLoading" class="my-4 text-center">
+    <div v-if="carouselStore.isLoading" class="my-4 text-center">
       <p>Loading carousel images...</p>
     </div>
-    <div v-else-if="error" class="my-4 text-center text-danger">
-      <p>{{ error }}</p>
+    <div v-else-if="carouselStore.error" class="my-4 text-center text-danger">
+      <p>{{ carouselStore.error }}</p>
     </div>
     <Splide 
       v-else
@@ -135,7 +92,7 @@ const pushBlogRoute = (route) => {
       }" 
       aria-label="Carousel Images"
     >
-      <SplideSlide v-for="image in carouselImages" :key="image.id">
+      <SplideSlide v-for="image in carouselStore.data" :key="image.id">
         <div class="carousel-image-container">
           <img :src="image.src" :alt="image.alt" class="img-fluid">
         </div>
@@ -206,16 +163,16 @@ const pushBlogRoute = (route) => {
 
     <div class="row">
 
-      <div v-if="isArticlesLoading" class="col-12 text-center py-4">
+      <div v-if="articleStore.isFeaturedLoading" class="col-12 text-center py-4">
         <p>Loading featured articles...</p>
       </div>
       
-      <div v-else-if="articlesError" class="col-12 text-center py-4 text-danger">
-        <p>{{ articlesError }}</p>
+      <div v-else-if="articleStore.featuredError" class="col-12 text-center py-4 text-danger">
+        <p>{{ articleStore.featuredError }}</p>
       </div>
       
       <template v-else>
-        <div v-for="article in featuredArticles" :key="article.id" class="col-sm-6 mb-4 mb-sm-0">
+        <div v-for="article in articleStore.featuredArticles" :key="article.id" class="col-sm-6 mb-4 mb-sm-0">
           <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute(article.id)">
             <article>
               <div class="d-flex align-items-center justify-content-between mb-3">
@@ -245,17 +202,17 @@ const pushBlogRoute = (route) => {
       alignment="text-end"
     />
     
-    <div v-if="isStaffLoading" class="text-center py-4">
+    <div v-if="staffStore.isLoading" class="text-center py-4">
       <p>Loading team members...</p>
     </div>
     
-    <div v-else-if="staffError" class="text-center py-4 text-danger">
-      <p>{{ staffError }}</p>
+    <div v-else-if="staffStore.error" class="text-center py-4 text-danger">
+      <p>{{ staffStore.error }}</p>
     </div>
     
     <template v-else>
       <StaffEntry 
-        v-for="staff in staffMembers" 
+        v-for="staff in staffStore.data" 
         :key="staff.id"
         :name="staff.name"
         :title="staff.title"
