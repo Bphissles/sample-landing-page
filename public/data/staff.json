@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "title": "Lead Developer",
+    "image": "https://picsum.photos/seed/staff1/150",
+    "bio": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iure itaque? Qui rem voluptatibus aliquid debitis excepturi laborum fugit ipsa hic corporis facilis, nisi et quidem iste id dolorum ex, praesentium eaque sit aperiam incidunt?",
+    "socials": {
+      "github": "https://github.com/johndoe",
+      "instagram": "https://instagram.com/johndoe"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "title": "UX Designer",
+    "image": "https://picsum.photos/seed/staff2/150",
+    "bio": "Passionate about creating intuitive user experiences. With over 5 years of experience in UX/UI design, Jane has helped numerous projects achieve their design goals while maintaining a focus on user-centered design principles.",
+    "socials": {
+      "github": "https://github.com/janesmith",
+      "instagram": "https://instagram.com/janesmith"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "title": "Backend Engineer",
+    "image": "https://picsum.photos/seed/staff3/150",
+    "bio": "Specializing in scalable backend solutions and database optimization. Michael brings a wealth of knowledge in system architecture and performance tuning to ensure our applications run smoothly even under heavy loads.",
+    "socials": {
+      "github": "https://github.com/michaelj",
+      "instagram": "https://instagram.com/michaelj"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Emily Chen",
+    "title": "Creative Director",
+    "image": "https://picsum.photos/seed/staff4/150",
+    "bio": "With a background in both traditional and digital art, Emily leads our creative direction with a unique perspective. Her ability to blend artistic vision with practical implementation has been instrumental in defining our visual identity.",
+    "socials": {
+      "github": "https://github.com/emilyc",
+      "instagram": "https://instagram.com/emilyc"
+    }
+  }
+]

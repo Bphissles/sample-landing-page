@@ -8,20 +8,25 @@ import TimeLine from '@/components/TimeLine.vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { fetchCarouselImages } from '@/services/carouselApi';
 import { fetchFeaturedArticles } from '@/services/articleApi';
+import { fetchStaff } from '@/services/staffApi';
 
-// State for carousel images and featured articles
+// State for carousel images, featured articles, and staff
 const carouselImages = ref([]);
 const featuredArticles = ref([]);
+const staffMembers = ref([]);
 const isLoading = ref(true);
 const isArticlesLoading = ref(true);
+const isStaffLoading = ref(true);
 const error = ref(null);
 const articlesError = ref(null);
+const staffError = ref(null);
 
-// Fetch carousel images and featured articles when component mounts
+// Fetch carousel images, featured articles, and staff when component mounts
 onMounted(async () => {
   try {
     isLoading.value = true;
     isArticlesLoading.value = true;
+    isStaffLoading.value = true;
     
     // Fetch carousel images
     const carouselPromise = fetchCarouselImages()
@@ -48,9 +53,22 @@ onMounted(async () => {
       .finally(() => {
         isArticlesLoading.value = false;
       });
+      
+    // Fetch staff members
+    const staffPromise = fetchStaff()
+      .then(staff => {
+        staffMembers.value = staff;
+      })
+      .catch(err => {
+        staffError.value = 'Failed to load staff data';
+        console.error('Staff error:', err);
+      })
+      .finally(() => {
+        isStaffLoading.value = false;
+      });
     
-    // Wait for both promises to resolve
-    await Promise.all([carouselPromise, articlesPromise]);
+    // Wait for all promises to resolve
+    await Promise.all([carouselPromise, articlesPromise, staffPromise]);
   } catch (err) {
     console.error('General error:', err);
   }
@@ -223,14 +241,29 @@ const pushBlogRoute = (route) => {
   <div class="container-lg">
     <SectionHeading 
       heading="Who We Are?"
-      sub-heading="Some Bitches"
+      sub-heading="Our Team"
       alignment="text-end"
     />
     
-    <StaffEntry />
-    <StaffEntry />
-    <StaffEntry />
-    <StaffEntry />
+    <div v-if="isStaffLoading" class="text-center py-4">
+      <p>Loading team members...</p>
+    </div>
+    
+    <div v-else-if="staffError" class="text-center py-4 text-danger">
+      <p>{{ staffError }}</p>
+    </div>
+    
+    <template v-else>
+      <StaffEntry 
+        v-for="staff in staffMembers" 
+        :key="staff.id"
+        :name="staff.name"
+        :title="staff.title"
+        :image="staff.image"
+        :bio="staff.bio"
+        :socials="staff.socials"
+      />
+    </template>
   </div>
 
 </template>
