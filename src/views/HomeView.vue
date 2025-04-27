@@ -7,22 +7,52 @@ import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { fetchCarouselImages } from '@/services/carouselApi';
+import { fetchFeaturedArticles } from '@/services/articleApi';
 
-// State for carousel images
+// State for carousel images and featured articles
 const carouselImages = ref([]);
+const featuredArticles = ref([]);
 const isLoading = ref(true);
+const isArticlesLoading = ref(true);
 const error = ref(null);
+const articlesError = ref(null);
 
-// Fetch carousel images when component mounts
+// Fetch carousel images and featured articles when component mounts
 onMounted(async () => {
   try {
     isLoading.value = true;
-    carouselImages.value = await fetchCarouselImages();
+    isArticlesLoading.value = true;
+    
+    // Fetch carousel images
+    const carouselPromise = fetchCarouselImages()
+      .then(images => {
+        carouselImages.value = images;
+      })
+      .catch(err => {
+        error.value = 'Failed to load carousel images';
+        console.error('Carousel error:', err);
+      })
+      .finally(() => {
+        isLoading.value = false;
+      });
+    
+    // Fetch featured articles
+    const articlesPromise = fetchFeaturedArticles()
+      .then(articles => {
+        featuredArticles.value = articles;
+      })
+      .catch(err => {
+        articlesError.value = 'Failed to load featured articles';
+        console.error('Articles error:', err);
+      })
+      .finally(() => {
+        isArticlesLoading.value = false;
+      });
+    
+    // Wait for both promises to resolve
+    await Promise.all([carouselPromise, articlesPromise]);
   } catch (err) {
-    error.value = 'Failed to load carousel images';
-    console.error(err);
-  } finally {
-    isLoading.value = false;
+    console.error('General error:', err);
   }
 });
 
@@ -158,55 +188,34 @@ const pushBlogRoute = (route) => {
 
     <div class="row">
 
-      <div class="col-sm-6 mb-4 mb-sm-0" >
-        <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute('articleHome1')">
-          <article class="">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <p class="mb-0 h3">Article Type</p>
-              <p><em>PUBLISH DATE</em></p>
-            </div>
-            <img src="https://picsum.photos/600/250" alt="" class="img-fluid rounded">
-            <h3 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h3>
-            <p>
-              Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, 
-              labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. 
-              Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas 
-              doloribus enim consequuntur eius.
-            </p>
-            <div class="text-end mt-3">
-              <RouterLink to="/blog/articleHome1">
-                <em>Keep Reading</em>
-              </RouterLink>
-            </div>
-          </article>
-        </div>
+      <div v-if="isArticlesLoading" class="col-12 text-center py-4">
+        <p>Loading featured articles...</p>
       </div>
-
-      <div class="col-sm-6" >
-        <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute('articleHome2')">
-          <article class="">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-              <p class="mb-0 h3">Audio Design</p>
-              <p><em>PUBLISH DATE</em></p>
-            </div>
-            <img src="https://picsum.photos/600/250" alt="" class="img-fluid rounded">
-            <h3 class="my-3">Subject Lorem ipsum dolor sit amet consectetur.</h3>
-            <p>
-              Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, 
-              labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. 
-              Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas 
-              doloribus enim consequuntur eius.
-            </p>
-            <div class="text-end mt-3">
-              <RouterLink to="/blog/articleHome2">
-                <em>Keep Reading</em>
-              </RouterLink>
-            </div>
-          </article>
-        </div>
+      
+      <div v-else-if="articlesError" class="col-12 text-center py-4 text-danger">
+        <p>{{ articlesError }}</p>
       </div>
+      
+      <template v-else>
+        <div v-for="article in featuredArticles" :key="article.id" class="col-sm-6 mb-4 mb-sm-0">
+          <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute(article.id)">
+            <article>
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <p class="mb-0 h3">{{ article.type }}</p>
+                <p><em>{{ new Date(article.publishDate).toLocaleDateString() }}</em></p>
+              </div>
+              <img :src="article.image" :alt="article.title" class="img-fluid rounded">
+              <h3 class="my-3">{{ article.title }}</h3>
+              <p>{{ article.preview }}</p>
+              <div class="text-end mt-3">
+                <RouterLink :to="`/blog/${article.id}`">
+                  <em>Keep Reading</em>
+                </RouterLink>
+              </div>
+            </article>
+          </div>
+        </div>
+      </template>
 
     </div>
   </div>

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "article1",
+    "title": "Article Title",
+    "publishDate": "2025-04-15",
+    "type": "Article Type",
+    "image": "https://picsum.photos/600/250",
+    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
+    "tags": [
+      { "name": "Game Play", "class": "text-bg-secondary" },
+      { "name": "Progress", "class": "text-bg-success" },
+      { "name": "Audio", "class": "text-bg-primary" }
+    ],
+    "featured": false
+  },
+  {
+    "id": "article2",
+    "title": "Article Title Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "publishDate": "2025-04-10",
+    "type": "Article Type",
+    "image": "https://picsum.photos/600/250",
+    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
+    "tags": [
+      { "name": "Behind the Scenes", "class": "text-bg-warning" },
+      { "name": "Game Play", "class": "text-bg-secondary" }
+    ],
+    "featured": false
+  },
+  {
+    "id": "article3",
+    "title": "Article Title",
+    "publishDate": "2025-04-05",
+    "type": "Article Type",
+    "image": "https://picsum.photos/600/250",
+    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
+    "tags": [
+      { "name": "Progress", "class": "text-bg-success" },
+      { "name": "Audio", "class": "text-bg-primary" }
+    ],
+    "featured": false
+  },
+  {
+    "id": "articleHome1",
+    "title": "Subject Lorem ipsum dolor sit amet consectetur.",
+    "publishDate": "2025-04-20",
+    "type": "Article Type",
+    "image": "https://picsum.photos/600/250",
+    "preview": "Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas doloribus enim consequuntur eius.",
+    "tags": [
+      { "name": "Featured", "class": "text-bg-danger" },
+      { "name": "Game Play", "class": "text-bg-secondary" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "articleHome2",
+    "title": "Subject Lorem ipsum dolor sit amet consectetur.",
+    "publishDate": "2025-04-18",
+    "type": "Audio Design",
+    "image": "https://picsum.photos/600/250",
+    "preview": "Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas doloribus enim consequuntur eius.",
+    "tags": [
+      { "name": "Featured", "class": "text-bg-danger" },
+      { "name": "Audio", "class": "text-bg-primary" }
+    ],
+    "featured": true
+  }
+]
