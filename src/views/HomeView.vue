@@ -1,10 +1,30 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import HeroBanner from '@/components/HeroBanner.vue'
 import SectionHeading from '@/components/SectionHeading.vue';
 import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { fetchCarouselImages } from '@/services/carouselApi';
+
+// State for carousel images
+const carouselImages = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
+
+// Fetch carousel images when component mounts
+onMounted(async () => {
+  try {
+    isLoading.value = true;
+    carouselImages.value = await fetchCarouselImages();
+  } catch (err) {
+    error.value = 'Failed to load carousel images';
+    console.error(err);
+  } finally {
+    isLoading.value = false;
+  }
+});
 
 const router = useRouter();
 const pushBlogRoute = (route) => {
@@ -45,39 +65,32 @@ const pushBlogRoute = (route) => {
   </div>
 
   <div class="image-carousel py-5 text-center">
-    <Splide :options="{ type:'loop',perPage:4,autoplay:true,speed:2000,pauseOnFocus:true,breakpoints: {640: {perPage: 1,},} }" aria-label="My Favorite Images">
-      <SplideSlide>
-        <img src="https://picsum.photos/800/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/600/400" alt="Sample 1">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/625/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/550/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/500/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/570/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/600/400" alt="Sample 1">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/720/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/550/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/500/400" alt="Sample 2">
-      </SplideSlide>
-      <SplideSlide>
-        <img src="https://picsum.photos/570/400" alt="Sample 2">
+    <div v-if="isLoading" class="my-4 text-center">
+      <p>Loading carousel images...</p>
+    </div>
+    <div v-else-if="error" class="my-4 text-center text-danger">
+      <p>{{ error }}</p>
+    </div>
+    <Splide 
+      v-else
+      :options="{ 
+        type: 'loop',
+        perPage: 4,
+        autoplay: false,
+        speed: 2000,
+        pauseOnFocus: true,
+        breakpoints: {
+          640: { perPage: 1 },
+          768: { perPage: 2 },
+          992: { perPage: 3 }
+        }
+      }" 
+      aria-label="Carousel Images"
+    >
+      <SplideSlide v-for="image in carouselImages" :key="image.id">
+        <div class="carousel-image-container">
+          <img :src="image.src" :alt="image.alt" class="img-fluid">
+        </div>
       </SplideSlide>
     </Splide>
   </div>
@@ -212,6 +225,20 @@ const pushBlogRoute = (route) => {
   </div>
 
 </template>
+
+<style scoped>
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-image-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+</style>
 <style lang="scss" scoped>
 @import '../assets/scss/variables/colors';
 

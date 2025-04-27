@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "src": "/images/temp-images/temp1.jpeg",
+    "alt": "Carousel Image 1",
+    "title": "Image 1"
+  },
+  {
+    "id": 2,
+    "src": "/images/temp-images/temp2.jpeg",
+    "alt": "Carousel Image 2",
+    "title": "Image 2"
+  },
+  {
+    "id": 3,
+    "src": "/images/temp-images/temp3.jpeg",
+    "alt": "Carousel Image 3",
+    "title": "Image 3"
+  },
+  {
+    "id": 4,
+    "src": "/images/temp-images/temp4.jpeg",
+    "alt": "Carousel Image 4",
+    "title": "Image 4"
+  },
+  {
+    "id": 5,
+    "src": "/images/temp-images/temp5.jpeg",
+    "alt": "Carousel Image 5",
+    "title": "Image 5"
+  },
+  {
+    "id": 6,
+    "src": "/images/temp-images/temp6.jpeg",
+    "alt": "Carousel Image 6",
+    "title": "Image 6"
+  },
+  {
+    "id": 7,
+    "src": "/images/temp-images/temp7.jpeg",
+    "alt": "Carousel Image 7",
+    "title": "Image 7"
+  }
+]
