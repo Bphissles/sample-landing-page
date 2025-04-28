@@ -1,0 +1,35 @@
+[
+  {
+    "id": "card1",
+    "title": "Getting Started",
+    "subtitle": "Quick Introduction",
+    "type": "text",
+    "content": "Welcome to our platform! This card provides a quick overview of the key features and how to get started with our services.",
+    "links": [
+      { "text": "Documentation", "url": "#documentation" },
+      { "text": "Tutorials", "url": "#tutorials" }
+    ]
+  },
+  {
+    "id": "card2",
+    "title": "Key Features",
+    "subtitle": "What We Offer",
+    "type": "list",
+    "items": [
+      "Responsive design templates",
+      "Interactive components",
+      "Performance optimization"
+    ]
+  },
+  {
+    "id": "card3",
+    "title": "Resources",
+    "subtitle": "Helpful Links",
+    "type": "text",
+    "content": "Explore our extensive resource library to enhance your development skills and stay updated with the latest industry trends.",
+    "links": [
+      { "text": "Resource Library", "url": "#resources" },
+      { "text": "Community Forum", "url": "#forum" }
+    ]
+  }
+]

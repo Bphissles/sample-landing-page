@@ -1,8 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
 import ArticlePreview from '@/components/ArticlePreview.vue';
+import CardItem from '@/components/CardItem.vue';
 import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
 import { useRouter } from 'vue-router';
@@ -12,11 +13,13 @@ import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import { useCarouselStore } from '@/stores/carouselStore';
 import { useArticleStore } from '@/stores/articleStore';
 import { useStaffStore } from '@/stores/staffStore';
+import { useCardStore } from '@/stores/cardStore';
 
 // Initialize Pinia stores
 const carouselStore = useCarouselStore();
 const articleStore = useArticleStore();
 const staffStore = useStaffStore();
+const cardStore = useCardStore();
 
 // Fetch data when component mounts
 onMounted(async () => {
@@ -25,7 +28,8 @@ onMounted(async () => {
     await Promise.all([
       carouselStore.fetchData(),
       articleStore.fetchFeaturedArticles(),
-      staffStore.fetchData()
+      staffStore.fetchData(),
+      cardStore.fetchAllCards()
     ]);
   } catch (err) {
     console.error('Error fetching data:', err);
@@ -33,9 +37,6 @@ onMounted(async () => {
 });
 
 const router = useRouter();
-const pushBlogRoute = (route) => {
-  router.push(`/blog/${route}`);
-}
 </script>
 
 <template>
@@ -109,43 +110,24 @@ const pushBlogRoute = (route) => {
       sub-heading="Oh Hey some accent text"
     />
 
-    <div class="row">
-      <div class="col-sm-4 mb-4 mb-md-0">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-4 mb-4 mb-md-0">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-            <ul class="list-group">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
+    <!-- Card loading state -->
+    <div v-if="cardStore.isLoading" class="text-center py-4">
+      <p>Loading cards...</p>
+    </div>
+    
+    <!-- Card error state -->
+    <div v-else-if="cardStore.error" class="text-center py-4 text-danger">
+      <p>{{ cardStore.error }}</p>
+    </div>
+    
+    <!-- Cards content -->
+    <div v-else class="row">
+      <div 
+        v-for="card in cardStore.allCards" 
+        :key="card.id" 
+        class="col-sm-4 mb-4 mb-md-0"
+      >
+        <CardItem :card="card" />
       </div>
     </div>
 

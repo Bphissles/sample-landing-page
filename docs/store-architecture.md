@@ -12,6 +12,7 @@ This document provides a comprehensive guide to the Pinia store architecture imp
   - [Article Store](#article-store)
   - [Carousel Store](#carousel-store)
   - [Staff Store](#staff-store)
+  - [Card Store](#card-store)
 - [Usage in Components](#usage-in-components)
 - [Best Practices](#best-practices)
 - [Extending the System](#extending-the-system)
@@ -176,6 +177,83 @@ The staff store (`staffStore.js`) uses the base API store to manage staff member
 export const useStaffStore = createApiStore('staff', fetchStaff);
 ```
 
+### Card Store
+
+The card store (`cardStore.js`) manages card data for displaying various card components in the application.
+
+#### Key Features
+
+- **All Cards**: Fetches and caches all cards from the JSON file
+- **Card by ID**: Retrieves specific cards by ID
+- **Flexible Card Types**: Supports different card types (text, list) through a unified interface
+
+#### Implementation
+
+```javascript
+// Example of the card store with specialized functionality
+export const useCardStore = defineStore('cardStore', {
+  state: () => ({
+    baseStore: useBaseCardStore()
+  }),
+  
+  getters: {
+    allCards() {
+      return this.baseStore.data;
+    },
+    
+    isLoading() {
+      return this.baseStore.isLoading;
+    },
+    
+    error() {
+      return this.baseStore.error;
+    }
+  },
+  
+  actions: {
+    async fetchAllCards(forceRefresh = false) {
+      return await this.baseStore.fetchData(forceRefresh);
+    },
+    
+    getCardById(id) {
+      if (!this.baseStore.data.length) return null;
+      return this.baseStore.data.find(card => card.id === id) || null;
+    }
+  }
+});
+```
+
+#### Data Structure
+
+The card data is stored in `public/data/cards.json` with the following structure:
+
+```json
+[
+  {
+    "id": "card1",
+    "title": "Getting Started",
+    "subtitle": "Quick Introduction",
+    "type": "text",
+    "content": "Welcome to our platform!",
+    "links": [
+      { "text": "Documentation", "url": "#documentation" },
+      { "text": "Tutorials", "url": "#tutorials" }
+    ]
+  },
+  {
+    "id": "card2",
+    "title": "Key Features",
+    "subtitle": "What We Offer",
+    "type": "list",
+    "items": [
+      "Responsive design templates",
+      "Interactive components",
+      "Performance optimization"
+    ]
+  }
+]
+```
+
 ## Usage in Components
 
 Components use the stores by importing and initializing them, then accessing their state, getters, and actions.
@@ -187,18 +265,21 @@ Components use the stores by importing and initializing them, then accessing the
 import { useCarouselStore } from '@/stores/carouselStore';
 import { useArticleStore } from '@/stores/articleStore';
 import { useStaffStore } from '@/stores/staffStore';
+import { useCardStore } from '@/stores/cardStore';
 
 // Initialize stores
 const carouselStore = useCarouselStore();
 const articleStore = useArticleStore();
 const staffStore = useStaffStore();
+const cardStore = useCardStore();
 
 // Fetch data when component mounts
 onMounted(async () => {
   await Promise.all([
     carouselStore.fetchData(),
     articleStore.fetchFeaturedArticles(),
-    staffStore.fetchData()
+    staffStore.fetchData(),
+    cardStore.fetchAllCards()
   ]);
 });
 
