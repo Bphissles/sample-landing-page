@@ -5,6 +5,7 @@ import SectionHeading from '@/components/SectionHeading.vue';
 import ArticleListItem from '@/components/ArticleListItem.vue';
 import { useArticleStore } from '@/stores/articleStore';
 import { usePageContentStore } from '@/stores/pageContentStore';
+import { getSection, getHeroContent } from '@/utils/pageContentUtils';
 
 // Initialize stores
 const articleStore = useArticleStore();
@@ -12,13 +13,10 @@ const pageContentStore = usePageContentStore();
 
 // Page content
 const pageContent = computed(() => pageContentStore.getPageContent('blog'));
-const heroContent = computed(() => pageContent.value?.hero);
+const heroContent = computed(() => getHeroContent(pageContent.value));
 
-// Get section content by ID
-const getSection = (sectionId) => {
-  if (!pageContent.value || !pageContent.value.sections) return null;
-  return pageContent.value.sections.find(section => section.id === sectionId);
-};
+// Create a wrapper function for getSection that uses the current pageContent
+const getSectionFromCurrentPage = (sectionId) => getSection(pageContent.value, sectionId);
 
 // Fetch all articles when component mounts
 onMounted(async () => {
@@ -41,9 +39,9 @@ onMounted(async () => {
   
   <div class="container-lg">
     <SectionHeading
-      :heading="getSection('articles')?.heading"
-      :sub-heading="getSection('articles')?.subHeading"
-      :alignment="getSection('articles')?.alignment"
+      :heading="getSectionFromCurrentPage('articles')?.heading"
+      :sub-heading="getSectionFromCurrentPage('articles')?.subHeading"
+      :alignment="getSectionFromCurrentPage('articles')?.alignment"
     />
 
     <div v-if="articleStore.baseStore.isLoading" class="text-center py-4">

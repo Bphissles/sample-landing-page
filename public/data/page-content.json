@@ -9,7 +9,11 @@
         "id": "intro",
         "heading": "Our Vision",
         "subHeading": "What we're building",
-        "alignment": "text-start"
+        "alignment": "text-start",
+        "content": [
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vitae sunt aut distinctio iste reiciendis, nesciunt, nam eaque impedit voluptate, veritatis aspernatur ipsa dicta ut id minima. Blanditiis, libero! Veniam repudiandae libero adipisci tenetur accusantium iste voluptas nam cum! Nesciunt nulla nemo maxime quo perspiciatis!",
+          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vitae sunt aut distinctio iste reiciendis, nesciunt, nam eaque impedit voluptate, veritatis aspernatur ipsa dicta ut id minima. Blanditiis, libero! Veniam repudiandae libero adipisci tenetur accusantium iste voluptas nam cum! Nesciunt nulla nemo maxime quo perspiciatis!"
+        ]
       },
       {
         "id": "features",

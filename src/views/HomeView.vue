@@ -15,6 +15,7 @@ import { useArticleStore } from '@/stores/articleStore';
 import { useStaffStore } from '@/stores/staffStore';
 import { useCardStore } from '@/stores/cardStore';
 import { usePageContentStore } from '@/stores/pageContentStore';
+import { getSection, getHeroContent } from '@/utils/pageContentUtils';
 
 // Initialize Pinia stores
 const carouselStore = useCarouselStore();
@@ -25,13 +26,10 @@ const pageContentStore = usePageContentStore();
 
 // Page content
 const pageContent = computed(() => pageContentStore.getPageContent('home'));
-const heroContent = computed(() => pageContent.value?.hero);
+const heroContent = computed(() => getHeroContent(pageContent.value));
 
-// Get section content by ID
-const getSection = (sectionId) => {
-  if (!pageContent.value || !pageContent.value.sections) return null;
-  return pageContent.value.sections.find(section => section.id === sectionId);
-};
+// Create a wrapper function for getSection that uses the current pageContent
+const getSectionFromCurrentPage = (sectionId) => getSection(pageContent.value, sectionId);
 
 // Fetch data when component mounts
 onMounted(async () => {
@@ -52,34 +50,25 @@ onMounted(async () => {
 
 <template>
   <HeroBanner
-    :heading="heroContent.heading"
-    :sub-heading="heroContent.subHeading"
+    :heading="heroContent?.heading"
+    :sub-heading="heroContent?.subHeading"
   />
   <div class="container-lg">
     <SectionHeading
-      :heading="getSection('intro')?.heading"
-      :sub-heading="getSection('intro')?.subHeading"
-      :alignment="getSection('intro')?.alignment"
+      :heading="getSectionFromCurrentPage('intro')?.heading"
+      :sub-heading="getSectionFromCurrentPage('intro')?.subHeading"
+      :alignment="getSectionFromCurrentPage('intro')?.alignment"
     />
 
-    <div class="mb-4">
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vitae 
-        sunt aut distinctio iste reiciendis, nesciunt, nam eaque impedit voluptate, 
-        veritatis aspernatur ipsa dicta ut id minima. Blanditiis, libero! Veniam 
-        repudiandae libero adipisci tenetur accusantium iste voluptas nam cum! 
-        Nesciunt nulla nemo maxime quo perspiciatis!
-      </p>
-    </div>
-
-    <div class="mb-4">
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vitae 
-        sunt aut distinctio iste reiciendis, nesciunt, nam eaque impedit voluptate, 
-        veritatis aspernatur ipsa dicta ut id minima. Blanditiis, libero! Veniam 
-        repudiandae libero adipisci tenetur accusantium iste voluptas nam cum! 
-        Nesciunt nulla nemo maxime quo perspiciatis!
-      </p>
+    <!-- Display intro content from page content data -->
+    <div v-if="getSectionFromCurrentPage('intro')?.content" class="intro-content">
+      <div 
+        v-for="(paragraph, index) in getSectionFromCurrentPage('intro').content" 
+        :key="index" 
+        class="mb-4"
+      >
+        <p>{{ paragraph }}</p>
+      </div>
     </div>
   </div>
 
@@ -118,9 +107,9 @@ onMounted(async () => {
 
   <div class="container-lg">
     <SectionHeading
-      :heading="getSection('features')?.heading"
-      :sub-heading="getSection('features')?.subHeading"
-      :alignment="getSection('features')?.alignment"
+      :heading="getSectionFromCurrentPage('features')?.heading"
+      :sub-heading="getSectionFromCurrentPage('features')?.subHeading"
+      :alignment="getSectionFromCurrentPage('features')?.alignment"
     />
 
     <!-- Card loading state -->
@@ -145,15 +134,15 @@ onMounted(async () => {
     </div>
 
     <SectionHeading
-      :heading="getSection('blog')?.heading"
-      :sub-heading="getSection('blog')?.subHeading"
-      :alignment="getSection('blog')?.alignment"
-      :has-action="getSection('blog')?.hasAction"
+      :heading="getSectionFromCurrentPage('blog')?.heading"
+      :sub-heading="getSectionFromCurrentPage('blog')?.subHeading"
+      :alignment="getSectionFromCurrentPage('blog')?.alignment"
+      :has-action="getSectionFromCurrentPage('blog')?.hasAction"
     >
       <template #action>
         <p class="h5">
-          <RouterLink :to="getSection('blog')?.actionLink || '/blog'">
-            <em>{{ getSection('blog')?.actionText || 'Full Blog' }}</em>
+          <RouterLink :to="getSectionFromCurrentPage('blog')?.actionLink || '/blog'">
+            <em>{{ getSectionFromCurrentPage('blog')?.actionText || 'Full Blog' }}</em>
           </RouterLink>
         </p>
       </template>
@@ -180,15 +169,15 @@ onMounted(async () => {
 
   <div class="container-lg">
     <SectionHeading 
-      :heading="getSection('team')?.heading"
-      :sub-heading="getSection('team')?.subHeading"
-      :alignment="getSection('team')?.alignment"
-      :has-action="getSection('team')?.hasAction"
+      :heading="getSectionFromCurrentPage('team')?.heading"
+      :sub-heading="getSectionFromCurrentPage('team')?.subHeading"
+      :alignment="getSectionFromCurrentPage('team')?.alignment"
+      :has-action="getSectionFromCurrentPage('team')?.hasAction"
     >
       <template #action>
         <p class="h5">
-          <RouterLink :to="getSection('team')?.actionLink">
-            <em>{{ getSection('team')?.actionText || 'About Us' }}</em>
+          <RouterLink :to="getSectionFromCurrentPage('team')?.actionLink">
+            <em>{{ getSectionFromCurrentPage('team')?.actionText || 'About Us' }}</em>
           </RouterLink>
         </p>
       </template>
