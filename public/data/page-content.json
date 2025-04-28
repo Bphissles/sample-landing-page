@@ -2,7 +2,8 @@
   "home": {
     "hero": {
       "heading": "WELCOME TO OUR PLATFORM",
-      "subHeading": "Building the future together"
+      "subHeading": "Building the future together",
+      "image": "/images/hero/home-hero.jpg"
     },
     "sections": [
       {
@@ -44,7 +45,8 @@
   "blog": {
     "hero": {
       "heading": "OUR BLOG",
-      "subHeading": "Insights and updates"
+      "subHeading": "Insights and updates",
+      "image": "/images/hero/blog-hero.jpg"
     },
     "sections": [
       {

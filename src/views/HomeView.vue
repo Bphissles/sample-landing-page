@@ -52,6 +52,7 @@ onMounted(async () => {
   <HeroBanner
     :heading="heroContent?.heading"
     :sub-heading="heroContent?.subHeading"
+    :image="heroContent?.image"
   />
   <div class="container-lg">
     <SectionHeading

@@ -1,12 +1,16 @@
 <script setup>
 const props = defineProps({
   heading: String,
-  subHeading: String
+  subHeading: String,
+  image: {
+    type: String,
+    default: 'https://picsum.photos/1600/360'
+  }
 })
 </script>
 
 <template>
-  <div class="hero-banner" style="background-image: url(https://picsum.photos/1600/360);">
+  <div class="hero-banner" :style="{ backgroundImage: `url(${image})` }">
     <div class="w-100 hero-banner bg-dark bg-opacity-50">
       <div class="container-lg text-white">
         <h1 v-html="heading"></h1>
