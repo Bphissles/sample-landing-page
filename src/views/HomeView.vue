@@ -131,18 +131,16 @@ const router = useRouter();
       </div>
     </div>
 
-    <div class="section-heading pt-5 my-4">
-      <div class="d-flex align-items-end justify-content-between mb-2">
-        <div>
-          <h2>Maybe this is a blog section</h2>
-          <p><em>showcase a few</em></p>
-        </div>
-        
+    <SectionHeading
+      heading="Maybe this is a blog section"
+      sub-heading="showcase a few"
+    >
+      <template #action>
         <p class="h5">
           <RouterLink to="/blog"><em>Full Blog</em></RouterLink>
         </p>
-      </div>
-    </div>
+      </template>
+    </SectionHeading>
 
     <div class="row">
 
@@ -168,7 +166,13 @@ const router = useRouter();
       heading="Who We Are?"
       sub-heading="Our Team"
       alignment="text-end"
-    />
+    >
+      <template #action>
+        <p class="h5">
+          <RouterLink to="/about"><em>About Us</em></RouterLink>
+        </p>
+      </template>
+    </SectionHeading>
     
     <div v-if="staffStore.isLoading" class="text-center py-4">
       <p>Loading team members...</p>
