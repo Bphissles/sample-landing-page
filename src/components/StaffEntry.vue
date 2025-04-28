@@ -51,3 +51,9 @@
     </div>
   </div>
 </template>
+<style lang="scss">
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+</style>
