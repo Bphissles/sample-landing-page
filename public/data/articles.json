@@ -1,68 +1,292 @@
 [
   {
-    "id": "article1",
-    "title": "Article Title",
+    "id": "web-development-trends",
+    "title": "Top Web Development Trends for 2025",
     "publishDate": "2025-04-15",
-    "type": "Article Type",
-    "image": "https://picsum.photos/600/250",
-    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
-    "tags": [
-      { "name": "Game Play", "class": "text-bg-secondary" },
-      { "name": "Progress", "class": "text-bg-success" },
-      { "name": "Audio", "class": "text-bg-primary" }
+    "type": "Web Development",
+    "author": "Sarah Johnson",
+    "image": "https://picsum.photos/id/0/800/400",
+    "preview": "The web development landscape continues to evolve at a rapid pace. In this article, we explore the most significant trends that will shape the industry in 2025, from AI-driven development to new frontend frameworks.",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "As we move further into 2025, the web development landscape continues to evolve at a breakneck pace. New technologies emerge, existing ones mature, and development practices shift to accommodate changing user expectations and business needs."
+      },
+      {
+        "type": "heading",
+        "text": "AI-Assisted Development"
+      },
+      {
+        "type": "paragraph",
+        "text": "Perhaps the most transformative trend in web development is the integration of AI tools into the development workflow. From code generation to automated testing, AI is streamlining processes that once required significant manual effort."
+      },
+      {
+        "type": "paragraph",
+        "text": "Developers are now using AI assistants to write boilerplate code, debug applications, and even design user interfaces. This shift is not about replacing developers but enhancing their capabilities and allowing them to focus on more creative and strategic aspects of development."
+      },
+      {
+        "type": "heading",
+        "text": "WebAssembly Goes Mainstream"
+      },
+      {
+        "type": "paragraph",
+        "text": "WebAssembly (Wasm) has finally reached the tipping point of widespread adoption. Originally designed to enable high-performance applications in the browser, Wasm is now being used for everything from browser-based video editing to complex data visualizations."
+      },
+      {
+        "type": "paragraph",
+        "text": "The ability to run code written in languages like Rust, C++, and Go in the browser at near-native speed has opened up possibilities that were previously unimaginable for web applications."
+      },
+      {
+        "type": "heading",
+        "text": "Micro-Frontends Architecture"
+      },
+      {
+        "type": "paragraph",
+        "text": "As applications grow in complexity, development teams are increasingly turning to micro-frontends architecture. This approach extends the microservices concept to frontend development, allowing teams to build and deploy UI components independently."
+      },
+      {
+        "type": "paragraph",
+        "text": "This architecture is particularly valuable for large organizations with multiple teams working on different aspects of a single application, as it enables greater autonomy and faster iteration cycles."
+      }
     ],
-    "featured": false
+    "tags": [
+      { "name": "Web Dev", "class": "text-bg-primary" },
+      { "name": "Trends", "class": "text-bg-info" },
+      { "name": "AI", "class": "text-bg-success" }
+    ],
+    "featured": true
   },
   {
-    "id": "article2",
-    "title": "Article Title Lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "id": "vue-3-composition-api",
+    "title": "Mastering Vue 3 Composition API: Patterns and Best Practices",
     "publishDate": "2025-04-10",
-    "type": "Article Type",
-    "image": "https://picsum.photos/600/250",
-    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
-    "tags": [
-      { "name": "Behind the Scenes", "class": "text-bg-warning" },
-      { "name": "Game Play", "class": "text-bg-secondary" }
+    "type": "Framework Tutorial",
+    "author": "Michael Chen",
+    "image": "https://picsum.photos/id/1/800/400",
+    "preview": "The Composition API has revolutionized how we build Vue applications. This comprehensive guide explores advanced patterns and best practices to help you write cleaner, more maintainable Vue code.",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Vue 3's Composition API has fundamentally changed how developers structure their Vue applications. By providing a more flexible and powerful way to organize code, it addresses many of the limitations of the Options API used in earlier versions."
+      },
+      {
+        "type": "heading",
+        "text": "Why Use the Composition API?"
+      },
+      {
+        "type": "paragraph",
+        "text": "The primary advantage of the Composition API is its ability to organize code by logical concern rather than by option type. This makes it easier to extract, reuse, and test code across components."
+      },
+      {
+        "type": "paragraph",
+        "text": "For example, with the Options API, code related to a specific feature might be split across multiple options (data, methods, computed, etc.). With the Composition API, all of this code can be grouped together, making it easier to understand and maintain."
+      },
+      {
+        "type": "heading",
+        "text": "Composables: The Building Blocks"
+      },
+      {
+        "type": "paragraph",
+        "text": "Composables are the heart of the Composition API. These are reusable functions that encapsulate stateful logic and can be shared across components. Think of them as mixins but with better type inference and no property name conflicts."
+      },
+      {
+        "type": "code",
+        "language": "javascript",
+        "text": "// useCounter.js\nimport { ref } from 'vue'\n\nexport function useCounter() {\n  const count = ref(0)\n  \n  function increment() {\n    count.value++\n  }\n  \n  return {\n    count,\n    increment\n  }\n}"
+      },
+      {
+        "type": "paragraph",
+        "text": "This pattern allows you to extract complex logic from your components and reuse it across your application, leading to more maintainable and testable code."
+      }
     ],
-    "featured": false
+    "tags": [
+      { "name": "Vue.js", "class": "text-bg-success" },
+      { "name": "Tutorial", "class": "text-bg-secondary" }
+    ],
+    "featured": true
   },
   {
-    "id": "article3",
-    "title": "Article Title",
+    "id": "responsive-design-2025",
+    "title": "Responsive Design in 2025: Beyond Media Queries",
     "publishDate": "2025-04-05",
-    "type": "Article Type",
-    "image": "https://picsum.photos/600/250",
-    "preview": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dignissimos, voluptatem doloremque odit commodi, fugiat laborum vitae id consectetur perferendis, eius omnis placeat saepe quisquam eligendi sed. Culpa dicta necessitatibus ad odio nobis perferendis accusantium sint corporis nam quibusdam, quisquam velit saepe rerum? Iure tenetur, ipsum accusantium numquam repellat corporis.",
+    "type": "UI/UX Design",
+    "author": "Emma Rodriguez",
+    "image": "https://picsum.photos/id/3/800/400",
+    "preview": "Responsive design has evolved far beyond simple media queries. Learn about the cutting-edge techniques that are redefining how we build adaptive interfaces for the modern web.",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "When responsive design first emerged, it was primarily about adjusting layouts based on viewport size using media queries. In 2025, responsive design encompasses a much broader set of techniques and considerations."
+      },
+      {
+        "type": "heading",
+        "text": "Container Queries: The Game Changer"
+      },
+      {
+        "type": "paragraph",
+        "text": "Container queries have revolutionized responsive design by allowing components to adapt based on their parent container's size rather than the viewport size. This enables truly reusable components that can adapt to any context in which they're placed."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "text": "@container (min-width: 400px) {\n  .card {\n    display: grid;\n    grid-template-columns: 2fr 1fr;\n  }\n}"
+      },
+      {
+        "type": "heading",
+        "text": "Responsive to User Preferences"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern responsive design goes beyond screen size to consider user preferences and needs. This includes adapting to color scheme preferences (light/dark mode), reduced motion settings, and even preferred language or reading direction."
+      },
+      {
+        "type": "paragraph",
+        "text": "Using media queries like @media (prefers-color-scheme: dark) and @media (prefers-reduced-motion), we can create interfaces that respect user preferences and accessibility needs."
+      },
+      {
+        "type": "heading",
+        "text": "Fluid Typography and Spacing"
+      },
+      {
+        "type": "paragraph",
+        "text": "The days of fixed font sizes and spacing are behind us. Fluid typography uses viewport units and calc() functions to create smooth scaling of text and spacing across different viewport sizes."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "text": "h1 {\n  font-size: clamp(2rem, 5vw + 1rem, 4rem);\n}"
+      },
+      {
+        "type": "paragraph",
+        "text": "This approach eliminates the need for numerous breakpoints and creates a more natural scaling experience as users resize their browser or switch between devices."
+      }
+    ],
     "tags": [
-      { "name": "Progress", "class": "text-bg-success" },
-      { "name": "Audio", "class": "text-bg-primary" }
+      { "name": "CSS", "class": "text-bg-info" },
+      { "name": "Responsive", "class": "text-bg-warning" },
+      { "name": "Design", "class": "text-bg-danger" }
     ],
     "featured": false
   },
   {
-    "id": "articleHome1",
-    "title": "Subject Lorem ipsum dolor sit amet consectetur.",
-    "publishDate": "2025-04-20",
-    "type": "Article Type",
-    "image": "https://picsum.photos/600/250",
-    "preview": "Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas doloribus enim consequuntur eius.",
-    "tags": [
-      { "name": "Featured", "class": "text-bg-danger" },
-      { "name": "Game Play", "class": "text-bg-secondary" }
+    "id": "javascript-performance",
+    "title": "JavaScript Performance Optimization Techniques",
+    "publishDate": "2025-03-28",
+    "type": "Performance",
+    "author": "David Wilson",
+    "image": "https://picsum.photos/id/4/800/400",
+    "preview": "Performance remains a critical concern for web applications. Discover practical techniques to optimize your JavaScript code and deliver faster, more responsive user experiences.",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "As web applications grow more complex, optimizing JavaScript performance becomes increasingly important. Even small inefficiencies can compound to create noticeable slowdowns for users."
+      },
+      {
+        "type": "heading",
+        "text": "Measuring Performance"
+      },
+      {
+        "type": "paragraph",
+        "text": "Before optimizing, it's crucial to measure performance to identify bottlenecks. Tools like Chrome DevTools Performance panel, Lighthouse, and Web Vitals provide insights into where your application is spending time and what might be causing poor user experiences."
+      },
+      {
+        "type": "paragraph",
+        "text": "Remember the adage: 'Premature optimization is the root of all evil.' Always measure first to ensure you're optimizing the right things."
+      },
+      {
+        "type": "heading",
+        "text": "Code Splitting and Lazy Loading"
+      },
+      {
+        "type": "paragraph",
+        "text": "One of the most effective ways to improve initial load performance is to split your JavaScript bundle and load components only when needed. Modern bundlers like Webpack, Rollup, and Vite make this relatively straightforward."
+      },
+      {
+        "type": "code",
+        "language": "javascript",
+        "text": "// Vue example of lazy loading a component\nconst AdminDashboard = () => import('./components/AdminDashboard.vue')"
+      },
+      {
+        "type": "heading",
+        "text": "Optimizing Rendering Performance"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rendering performance is often a bottleneck in complex applications. Techniques like virtualization for long lists, debouncing or throttling event handlers, and using requestAnimationFrame for animations can significantly improve perceived performance."
+      },
+      {
+        "type": "paragraph",
+        "text": "Additionally, be mindful of causing layout thrashing by alternating between reading and writing to the DOM. Batch your DOM reads and writes to avoid forcing the browser to recalculate layout multiple times."
+      }
     ],
-    "featured": true
+    "tags": [
+      { "name": "JavaScript", "class": "text-bg-warning" },
+      { "name": "Performance", "class": "text-bg-danger" }
+    ],
+    "featured": false
   },
   {
-    "id": "articleHome2",
-    "title": "Subject Lorem ipsum dolor sit amet consectetur.",
-    "publishDate": "2025-04-18",
-    "type": "Audio Design",
-    "image": "https://picsum.photos/600/250",
-    "preview": "Article preview Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae aspernatur eius doloremque, magnam, temporibus voluptatum sapiente, labore rem accusamus deleniti fuga numquam pariatur autem dolorum nulla. Soluta, labore incidunt. Dolorem veniam ullam accusantium voluptatum quas doloribus enim consequuntur eius.",
-    "tags": [
-      { "name": "Featured", "class": "text-bg-danger" },
-      { "name": "Audio", "class": "text-bg-primary" }
+    "id": "css-grid-layouts",
+    "title": "Building Complex Layouts with CSS Grid",
+    "publishDate": "2025-03-15",
+    "type": "CSS Tutorial",
+    "author": "Alex Turner",
+    "image": "https://picsum.photos/id/11/800/400",
+    "preview": "CSS Grid has transformed how we approach web layouts. This tutorial walks through creating sophisticated, responsive layouts that would be difficult or impossible with older techniques.",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "CSS Grid Layout has revolutionized how we build web layouts, providing a two-dimensional system that handles both columns and rows. Unlike older methods, Grid allows for precise placement and alignment of elements in complex layouts."
+      },
+      {
+        "type": "heading",
+        "text": "Grid Fundamentals"
+      },
+      {
+        "type": "paragraph",
+        "text": "At its core, CSS Grid works by dividing a container into rows and columns, creating cells where content can be placed. The power of Grid comes from its flexibility—you can define tracks (rows and columns) using any length unit, including fractions of available space with the 'fr' unit."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "text": ".container {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n  grid-template-rows: auto 1fr auto;\n  gap: 20px;\n}"
+      },
+      {
+        "type": "heading",
+        "text": "Named Grid Areas"
+      },
+      {
+        "type": "paragraph",
+        "text": "One of Grid's most powerful features is the ability to name areas of your grid and place items within those areas. This creates an intuitive way to define complex layouts."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "text": ".container {\n  display: grid;\n  grid-template-areas:\n    'header header header'\n    'sidebar content content'\n    'footer footer footer';\n  grid-template-columns: 1fr 3fr 1fr;\n  grid-template-rows: auto 1fr auto;\n}\n\n.header { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.content { grid-area: content; }\n.footer { grid-area: footer; }"
+      },
+      {
+        "type": "heading",
+        "text": "Responsive Layouts Without Media Queries"
+      },
+      {
+        "type": "paragraph",
+        "text": "Grid's auto-placement and sizing features allow for creating responsive layouts with minimal or no media queries. Functions like minmax(), auto-fill, and auto-fit enable flexible layouts that adapt to available space."
+      },
+      {
+        "type": "code",
+        "language": "css",
+        "text": ".gallery {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));\n  gap: 20px;\n}"
+      },
+      {
+        "type": "paragraph",
+        "text": "This creates a responsive gallery where items automatically wrap to new rows as the container width changes, maintaining a minimum width of 250px and expanding to fill available space."
+      }
     ],
-    "featured": true
+    "tags": [
+      { "name": "CSS", "class": "text-bg-info" },
+      { "name": "Layout", "class": "text-bg-primary" },
+      { "name": "Tutorial", "class": "text-bg-secondary" }
+    ],
+    "featured": false
   }
 ]

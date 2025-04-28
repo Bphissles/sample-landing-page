@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
+import ArticleListItem from '@/components/ArticleListItem.vue';
 import { useRouter } from 'vue-router';
 import { useArticleStore } from '@/stores/articleStore';
 
@@ -45,46 +46,14 @@ const pushBlogRoute = (route) => {
     </div>
     
     <template v-else>
-      <article 
+      <ArticleListItem 
         v-for="article in articleStore.allArticles" 
         :key="article.id" 
-        class="article-card pb-4" 
-        @click="pushBlogRoute(article.id)"
-      >
-        <div class="border rounded d-block d-md-flex p-4 gap-4">
-          <div class="image">
-            <img :src="article.image" :alt="article.title" class="rounded img-fluid">
-          </div>
-          <div class="article-content w-100">
-            <div class="d-flex align-items-start justify-content-between gap-3">
-              
-              <div class="title">
-                <h3>{{ article.title }}</h3>
-                <p><em>{{ new Date(article.publishDate).toLocaleDateString() }}</em></p>
-              </div>
-              
-              <div class="tags text-end">
-                <template v-for="(tag, index) in article.tags" :key="index">
-                  <span :class="['badge', tag.class, 'text-white']">{{ tag.name }}</span><br v-if="index < article.tags.length - 1">
-                </template>
-              </div>
-
-            </div>
-
-            <hr>
-
-            <div class="article-preview">
-              <p>{{ article.preview }}</p>
-            </div>
-
-          </div>
-        </div>
-      </article>
+        :article="article" 
+      />
     </template>
   </div>
 </template>
 <style lang="scss" scoped>
-.article-card {
-  cursor: pointer;
-}
+/* Styles moved to ArticleListItem component */
 </style>

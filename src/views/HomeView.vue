@@ -1,10 +1,11 @@
 <script setup>
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import HeroBanner from '@/components/HeroBanner.vue'
+import { ref, onMounted } from 'vue';
+import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
+import ArticlePreview from '@/components/ArticlePreview.vue';
 import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
+import { useRouter } from 'vue-router';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 // Import Pinia stores
@@ -173,22 +174,7 @@ const pushBlogRoute = (route) => {
       
       <template v-else>
         <div v-for="article in articleStore.featuredArticles" :key="article.id" class="col-sm-6 mb-4 mb-sm-0">
-          <div class="article-card border rounded px-4 py-3" @click="pushBlogRoute(article.id)">
-            <article>
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <p class="mb-0 h3">{{ article.type }}</p>
-                <p><em>{{ new Date(article.publishDate).toLocaleDateString() }}</em></p>
-              </div>
-              <img :src="article.image" :alt="article.title" class="img-fluid rounded">
-              <h3 class="my-3">{{ article.title }}</h3>
-              <p>{{ article.preview }}</p>
-              <div class="text-end mt-3">
-                <RouterLink :to="`/blog/${article.id}`">
-                  <em>Keep Reading</em>
-                </RouterLink>
-              </div>
-            </article>
-          </div>
+          <ArticlePreview :article="article" />
         </div>
       </template>
 
