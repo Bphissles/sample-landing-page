@@ -1,0 +1,60 @@
+{
+  "home": {
+    "hero": {
+      "heading": "WELCOME TO OUR PLATFORM",
+      "subHeading": "Building the future together"
+    },
+    "sections": [
+      {
+        "id": "intro",
+        "heading": "Our Vision",
+        "subHeading": "What we're building",
+        "alignment": "text-start"
+      },
+      {
+        "id": "features",
+        "heading": "Key Features",
+        "subHeading": "What we offer",
+        "alignment": "text-start"
+      },
+      {
+        "id": "blog",
+        "heading": "Latest Articles",
+        "subHeading": "Stay updated with our news",
+        "alignment": "text-start",
+        "hasAction": true,
+        "actionLink": "/blog",
+        "actionText": "Full Blog"
+      },
+      {
+        "id": "team",
+        "heading": "Who We Are",
+        "subHeading": "Our Team",
+        "alignment": "text-end",
+        "hasAction": true,
+        "actionLink": "/about",
+        "actionText": "About Us"
+      }
+    ]
+  },
+  "blog": {
+    "hero": {
+      "heading": "OUR BLOG",
+      "subHeading": "Insights and updates"
+    },
+    "sections": [
+      {
+        "id": "articles",
+        "heading": "All Articles",
+        "subHeading": "Latest content from our team",
+        "alignment": "text-start"
+      }
+    ]
+  },
+  "article": {
+    "hero": {
+      "heading": "ARTICLE DETAILS",
+      "subHeading": "In-depth content"
+    }
+  }
+}

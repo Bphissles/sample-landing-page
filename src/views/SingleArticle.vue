@@ -3,6 +3,7 @@ import SectionHeading from '@/components/SectionHeading.vue';
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useArticleStore } from '@/stores/articleStore';
+import { usePageContentStore } from '@/stores/pageContentStore';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
@@ -10,9 +11,14 @@ import 'highlight.js/styles/github.css';
 const route = useRoute();
 const slug = ref(route.params.slug);
 const articleStore = useArticleStore();
+const pageContentStore = usePageContentStore();
 const article = ref(null);
 const isLoading = ref(true);
 const error = ref(null);
+
+// Page content
+const pageContent = computed(() => pageContentStore.getPageContent('article'));
+const heroContent = computed(() => pageContent.value?.hero || { heading: 'ARTICLE DETAILS', subHeading: 'In-depth content' });
 
 // Format the date for display
 const formattedDate = computed(() => {
@@ -51,8 +57,11 @@ onMounted(async () => {
   error.value = null;
   
   try {
-    // Fetch the article by ID (slug)
-    const fetchedArticle = await articleStore.getArticleById(slug.value);
+    // Fetch data in parallel
+    const [fetchedArticle] = await Promise.all([
+      articleStore.getArticleById(slug.value),
+      pageContentStore.fetchPageContent('article')
+    ]);
     
     if (fetchedArticle) {
       article.value = fetchedArticle;
@@ -178,5 +187,3 @@ onMounted(async () => {
     <p>No article found</p>
   </div>
 </template>
-
-<!-- Styles moved to src/assets/scss/_single-article.scss -->

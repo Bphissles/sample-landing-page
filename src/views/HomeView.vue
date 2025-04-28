@@ -1,12 +1,12 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
+import { RouterLink } from 'vue-router';
 import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
 import ArticlePreview from '@/components/ArticlePreview.vue';
 import CardItem from '@/components/CardItem.vue';
 import StaffEntry from '@/components/StaffEntry.vue';
 import TimeLine from '@/components/TimeLine.vue';
-import { useRouter } from 'vue-router';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 
 // Import Pinia stores
@@ -14,12 +14,24 @@ import { useCarouselStore } from '@/stores/carouselStore';
 import { useArticleStore } from '@/stores/articleStore';
 import { useStaffStore } from '@/stores/staffStore';
 import { useCardStore } from '@/stores/cardStore';
+import { usePageContentStore } from '@/stores/pageContentStore';
 
 // Initialize Pinia stores
 const carouselStore = useCarouselStore();
 const articleStore = useArticleStore();
 const staffStore = useStaffStore();
 const cardStore = useCardStore();
+const pageContentStore = usePageContentStore();
+
+// Page content
+const pageContent = computed(() => pageContentStore.getPageContent('home'));
+const heroContent = computed(() => pageContent.value?.hero);
+
+// Get section content by ID
+const getSection = (sectionId) => {
+  if (!pageContent.value || !pageContent.value.sections) return null;
+  return pageContent.value.sections.find(section => section.id === sectionId);
+};
 
 // Fetch data when component mounts
 onMounted(async () => {
@@ -29,25 +41,25 @@ onMounted(async () => {
       carouselStore.fetchData(),
       articleStore.fetchFeaturedArticles(),
       staffStore.fetchData(),
-      cardStore.fetchAllCards()
+      cardStore.fetchAllCards(),
+      pageContentStore.fetchPageContent('home')
     ]);
   } catch (err) {
     console.error('Error fetching data:', err);
   }
 });
-
-const router = useRouter();
 </script>
 
 <template>
   <HeroBanner
-    heading="LANDING PAGE"
-    sub-heading="small landing"
+    :heading="heroContent.heading"
+    :sub-heading="heroContent.subHeading"
   />
   <div class="container-lg">
     <SectionHeading
-      heading="What the fuck is it going to be"
-      sub-heading="A game or some shit"
+      :heading="getSection('intro')?.heading"
+      :sub-heading="getSection('intro')?.subHeading"
+      :alignment="getSection('intro')?.alignment"
     />
 
     <div class="mb-4">
@@ -106,8 +118,9 @@ const router = useRouter();
 
   <div class="container-lg">
     <SectionHeading
-      heading="Hey a level 2 Heading"
-      sub-heading="Oh Hey some accent text"
+      :heading="getSection('features')?.heading"
+      :sub-heading="getSection('features')?.subHeading"
+      :alignment="getSection('features')?.alignment"
     />
 
     <!-- Card loading state -->
@@ -132,12 +145,16 @@ const router = useRouter();
     </div>
 
     <SectionHeading
-      heading="Maybe this is a blog section"
-      sub-heading="showcase a few"
+      :heading="getSection('blog')?.heading"
+      :sub-heading="getSection('blog')?.subHeading"
+      :alignment="getSection('blog')?.alignment"
+      :has-action="getSection('blog')?.hasAction"
     >
       <template #action>
         <p class="h5">
-          <RouterLink to="/blog"><em>Full Blog</em></RouterLink>
+          <RouterLink :to="getSection('blog')?.actionLink || '/blog'">
+            <em>{{ getSection('blog')?.actionText || 'Full Blog' }}</em>
+          </RouterLink>
         </p>
       </template>
     </SectionHeading>
@@ -163,13 +180,16 @@ const router = useRouter();
 
   <div class="container-lg">
     <SectionHeading 
-      heading="Who We Are?"
-      sub-heading="Our Team"
-      alignment="text-end"
+      :heading="getSection('team')?.heading"
+      :sub-heading="getSection('team')?.subHeading"
+      :alignment="getSection('team')?.alignment"
+      :has-action="getSection('team')?.hasAction"
     >
       <template #action>
         <p class="h5">
-          <RouterLink to="/about"><em>About Us</em></RouterLink>
+          <RouterLink :to="getSection('team')?.actionLink">
+            <em>{{ getSection('team')?.actionText || 'About Us' }}</em>
+          </RouterLink>
         </p>
       </template>
     </SectionHeading>
@@ -194,5 +214,4 @@ const router = useRouter();
       />
     </template>
   </div>
-
 </template>

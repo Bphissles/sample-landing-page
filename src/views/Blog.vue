@@ -1,40 +1,49 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import HeroBanner from '@/components/HeroBanner.vue';
 import SectionHeading from '@/components/SectionHeading.vue';
 import ArticleListItem from '@/components/ArticleListItem.vue';
-import { useRouter } from 'vue-router';
 import { useArticleStore } from '@/stores/articleStore';
+import { usePageContentStore } from '@/stores/pageContentStore';
 
-// Initialize the article store
+// Initialize stores
 const articleStore = useArticleStore();
+const pageContentStore = usePageContentStore();
+
+// Page content
+const pageContent = computed(() => pageContentStore.getPageContent('blog'));
+const heroContent = computed(() => pageContent.value?.hero);
+
+// Get section content by ID
+const getSection = (sectionId) => {
+  if (!pageContent.value || !pageContent.value.sections) return null;
+  return pageContent.value.sections.find(section => section.id === sectionId);
+};
 
 // Fetch all articles when component mounts
 onMounted(async () => {
   try {
-    await articleStore.fetchAllArticles();
+    await Promise.all([
+      articleStore.fetchAllArticles(),
+      pageContentStore.fetchPageContent('blog')
+    ]);
   } catch (err) {
-    console.error('Error fetching articles:', err);
+    console.error('Error fetching data:', err);
   }
 });
-
-const router = useRouter();
-const pushBlogRoute = (route) => {
-  router.push(`/blog/${route}`);
-}
 </script>
 
 <template>
   <HeroBanner
-    heading="BLOG PAGE"
-    sub-heading="small Blog"
+    :heading="heroContent?.heading"
+    :sub-heading="heroContent?.subHeading"
   />
   
   <div class="container-lg">
-    <SectionHeading 
-      heading="Them Posts"
-      sub-heading="About the Stuff"
-      alignment="text-start"
+    <SectionHeading
+      :heading="getSection('articles')?.heading"
+      :sub-heading="getSection('articles')?.subHeading"
+      :alignment="getSection('articles')?.alignment"
     />
 
     <div v-if="articleStore.baseStore.isLoading" class="text-center py-4">
@@ -54,6 +63,3 @@ const pushBlogRoute = (route) => {
     </template>
   </div>
 </template>
-<style lang="scss" scoped>
-/* Styles moved to ArticleListItem component */
-</style>

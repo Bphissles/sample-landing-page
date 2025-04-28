@@ -13,6 +13,7 @@ This document provides a comprehensive guide to the Pinia store architecture imp
   - [Carousel Store](#carousel-store)
   - [Staff Store](#staff-store)
   - [Card Store](#card-store)
+  - [Page Content Store](#page-content-store)
 - [Usage in Components](#usage-in-components)
 - [Best Practices](#best-practices)
 - [Extending the System](#extending-the-system)
@@ -179,7 +180,7 @@ export const useStaffStore = createApiStore('staff', fetchStaff);
 
 ### Card Store
 
-The card store (`cardStore.js`) manages card data for displaying various card components in the application.
+The card store (`cardStore.js`) manages card content data used throughout the application. Cards are used to display various types of content in a consistent format.
 
 #### Key Features
 
@@ -254,6 +255,126 @@ The card data is stored in `public/data/cards.json` with the following structure
 ]
 ```
 
+### Page Content Store
+
+The page content store manages page-level content such as hero banners and section headings. This allows for centralized management of page content that can be easily updated without modifying component code.
+
+#### Data Structure
+
+The page content data is stored in `/public/data/page-content.json` and follows this structure:
+
+```json
+{
+  "home": {
+    "hero": {
+      "heading": "WELCOME TO OUR SITE",
+      "subHeading": "Discover our services and products"
+    },
+    "sections": [
+      {
+        "id": "intro",
+        "heading": "Our Vision",
+        "subHeading": "What we're building",
+        "alignment": "text-center"
+      },
+      {
+        "id": "blog",
+        "heading": "Latest Articles",
+        "subHeading": "Stay updated with our news",
+        "alignment": "text-start",
+        "hasAction": true,
+        "actionLink": "/blog",
+        "actionText": "Full Blog"
+      }
+    ]
+  },
+  "blog": {
+    "hero": {
+      "heading": "OUR BLOG",
+      "subHeading": "Insights and updates"
+    },
+    "sections": [
+      {
+        "id": "articles",
+        "heading": "All Articles",
+        "subHeading": "Latest content from our team",
+        "alignment": "text-start"
+      }
+    ]
+  }
+}
+```
+
+#### API Service
+
+The page content API service (`pageContentApi.js`) provides methods for fetching all page content or content for a specific page:
+
+```javascript
+// Fetch all page content
+const allContent = await fetchPageContent();
+
+// Fetch content for a specific page
+const homeContent = await fetchPageContentByName('home');
+```
+
+#### Implementation
+
+```javascript
+// Example of the page content store
+export const usePageContentStore = defineStore('pageContentStore', {
+  state: () => ({
+    data: {},
+    isLoading: false,
+    error: null,
+    lastFetched: null
+  }),
+  
+  getters: {
+    getPageContent(pageName) {
+      return this.data[pageName];
+    },
+    
+    getSection(pageName, sectionId) {
+      const pageContent = this.getPageContent(pageName);
+      return pageContent.sections.find(section => section.id === sectionId);
+    }
+  },
+  
+  actions: {
+    async fetchAllContent(forceRefresh = false) {
+      // Implementation details omitted for brevity
+    },
+    
+    async fetchPageContent(pageName, forceRefresh = false) {
+      // Implementation details omitted for brevity
+    }
+  }
+});
+```
+
+#### Usage
+
+```javascript
+import { usePageContentStore } from '@/stores/pageContentStore';
+
+const pageContentStore = usePageContentStore();
+
+// Fetch all page content
+await pageContentStore.fetchAllContent();
+
+// Fetch content for a specific page
+await pageContentStore.fetchPageContent('home');
+
+// Access page content
+const homeContent = pageContentStore.getPageContent('home');
+
+// Get a specific section by ID
+const blogSection = pageContentStore.getSection('home', 'blog');
+
+// Access hero content directly
+const heroContent = pageContentStore.getPageContent('home')?.hero;
+```
+
 ## Usage in Components
 
 Components use the stores by importing and initializing them, then accessing their state, getters, and actions.
@@ -266,12 +387,14 @@ import { useCarouselStore } from '@/stores/carouselStore';
 import { useArticleStore } from '@/stores/articleStore';
 import { useStaffStore } from '@/stores/staffStore';
 import { useCardStore } from '@/stores/cardStore';
+import { usePageContentStore } from '@/stores/pageContentStore';
 
 // Initialize stores
 const carouselStore = useCarouselStore();
 const articleStore = useArticleStore();
 const staffStore = useStaffStore();
 const cardStore = useCardStore();
+const pageContentStore = usePageContentStore();
 
 // Fetch data when component mounts
 onMounted(async () => {
@@ -279,7 +402,8 @@ onMounted(async () => {
     carouselStore.fetchData(),
     articleStore.fetchFeaturedArticles(),
     staffStore.fetchData(),
-    cardStore.fetchAllCards()
+    cardStore.fetchAllCards(),
+    pageContentStore.fetchAllContent()
   ]);
 });
 

@@ -4,7 +4,10 @@ This directory contains comprehensive documentation for the Site Starter project
 
 ## Available Documentation
 
-- [Store Architecture](./store-architecture.md) - Detailed explanation of the Pinia store system, including caching mechanisms, API integration, and usage patterns.
+- [Store Architecture](./store-architecture.md) - Details about the Pinia store implementation and patterns
+  - Includes information on the base API store factory pattern
+  - Documents article, carousel, staff, card, and page content stores
+  - Provides usage examples to the API services architecture, including error handling, data fetching patterns, and best practices for extending the system.
 - [API Integration](./api-integration.md) - Comprehensive guide to the API services architecture, including error handling, data fetching patterns, and best practices for extending the system.
 
 ## Component Overview
@@ -13,9 +16,12 @@ The project includes the following key components:
 
 ### Data Display Components
 
-- **ArticlePreview** - Card-style component for displaying article previews on the home page
-- **ArticleListItem** - Horizontal list-style component for displaying articles in the blog view
-- **CardItem** - Flexible component for displaying different types of card content (text, lists, etc.)
+- **Article Components**: `ArticlePreview.vue`, `ArticleListItem.vue` - Display article previews in different formats
+- **Card Components**: `CardItem.vue` - Displays card content from the card store
+- **Staff Components**: `StaffEntry.vue` - Displays staff member information
+- **Page Structure Components**: 
+  - `SectionHeading.vue` - Data-driven section headings with optional action slots
+  - `HeroBanner.vue` - Data-driven hero banners for page headers
 
 ### Data Management
 
@@ -23,6 +29,17 @@ The project includes the following key components:
 - **Card Store** - Manages card data with support for different card types
 - **Staff Store** - Manages staff member data
 - **Carousel Store** - Manages carousel image data
+- **Page Content Store** - Manages page-level content for hero banners and section headings
+
+## Data-Driven Architecture
+
+The application uses a data-driven approach with JSON files stored in `/public/data/`:
+
+- `articles.json` - Article content with structured content blocks
+- `carousel.json` - Carousel slide data
+- `staff.json` - Staff member information
+- `cards.json` - Card content data
+- `page-content.json` - Page-level content for hero banners and section headings
 
 ## Documentation Guidelines
 
